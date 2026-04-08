@@ -1,0 +1,67 @@
+/* App layout shell */
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.app-header {
+  background-color: white;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 18px 32px;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand-logo {
+  text-decoration: none;
+  color: #ff385c;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: #222;
+  font-weight: 500;
+  padding: 10px 16px;
+  border-radius: 999px;
+  transition: background-color 0.2s ease;
+}
+
+.main-nav a:hover {
+  background-color: #ececec;
+}
+
+/* Main page content */
+.page-content {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 32px;
+}
+
+/* Footer */
+.footer {
+  background-color: white;
+  border-top: 1px solid #e5e5e5;
+  padding: 20px 32px;
+  text-align: center;
+  color: #666;
+  font-size: 0.95rem;
+}
