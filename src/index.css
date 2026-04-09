@@ -37,14 +37,22 @@
 .main-nav a {
   text-decoration: none;
   color: #222;
-  font-weight: 500;
+  font-weight: bold;
   padding: 10px 16px;
   border-radius: 999px;
   transition: background-color 0.2s ease;
 }
 
+.main-nav a.active {
+  background-color: black;
+  color: white;
+}
+
+
 .main-nav a:hover {
+  color: black;
   background-color: #ececec;
+  transition: all 300ms ease;
 }
 
 /* Main page content */

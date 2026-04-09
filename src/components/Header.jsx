@@ -1,16 +1,26 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Header() {
   return (
     <header className="app-header">
       <div className="header-container">
-        <Link to="/" className="brand-logo">
+        <NavLink to="/" className="brand-logo">
           JacqueCodes
-        </Link>
+        </NavLink>
 
         <nav className="main-nav">
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
+          <NavLink
+            to="/login"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            Login
+          </NavLink>
+          <NavLink
+            to="/register"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            Register
+          </NavLink>
         </nav>
       </div>
     </header>
