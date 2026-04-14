@@ -6,7 +6,7 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  async function handleSubmit(event) {
+  async function handleRegister(event) {
     event.preventDefault();
     try {
       const response = await api.post("/auth/register", {
@@ -26,7 +26,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleRegister}>
       <header>
         <h1>Register</h1>
       </header>
@@ -61,7 +61,7 @@ export default function RegisterPage() {
           }}
         />
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit">Sign up</button>
     </form>
   );
 }
