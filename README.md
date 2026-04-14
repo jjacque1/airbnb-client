@@ -1,28 +1,35 @@
 # Airbnb Clone Frontend
 
-This is the frontend for my Airbnb Clone project, built with React and Vite. It is part of a polyrepo full-stack architecture, with the frontend and backend maintained in separate repositories.
+This is the frontend for my Airbnb Clone project, built with React and Vite. It is part of a polyrepo full-stack architecture, where the frontend and backend are maintained in separate repositories and communicate via RESTful APIs.
+
+---
 
 ## Current Project Status
 
 At this stage, the frontend includes:
 
-- React app initialized with Vite
-- production-style folder structure
-- React Router setup
-- shared layout with Header, Footer, and Outlet
-- navigation with active link styling using `NavLink`
-- centralized Axios API client
-- environment-based backend URL configuration using Vite `.env`
-- successful frontend-to-backend API connection
-- working user registration form with backend integration
+* React application initialized with Vite
+* Production-style folder structure with separation of concerns
+* React Router configuration with nested routing
+* Shared layout using Header, Footer, and Outlet
+* Navigation with active route styling using `NavLink`
+* Centralized Axios API client with credential support
+* Environment-based backend URL configuration using Vite `.env`
+* Successful frontend-to-backend API communication
+* Fully functional user registration flow
+* Fully functional user login flow with cookie-based authentication
+
+---
 
 ## Tech Stack
 
-- React
-- Vite
-- React Router DOM
-- Axios
-- CSS
+* React
+* Vite
+* React Router DOM
+* Axios
+* CSS
+
+---
 
 ## Folder Structure
 
@@ -44,89 +51,146 @@ src
 ├── App.jsx
 └── main.jsx
 ```
+
+---
+
 ## Features Implemented
 
-App Bootstrapping
-- Created the frontend with Vite
-- Configured React rendering through main.jsx
-- Wrapped the application in BrowserRouter
+### App Bootstrapping
 
-## Routing Architecture
+* Initialized frontend using Vite
+* Configured React rendering via `main.jsx`
+* Wrapped application with `BrowserRouter`
 
-- Moved route definitions into a dedicated AppRoutes.jsx file
-- Created separate page components for Home, Login, and Register
-- Used Layout.jsx with Outlet to support shared page structure
+---
 
-## Shared Layout
+### Routing Architecture
 
-- Built reusable Header, Footer, and Layout components
-- Structured the page shell so all routed content renders inside the 
+* Extracted route definitions into `AppRoutes.jsx`
+* Implemented page-based routing (Home, Login, Register)
+* Used `Layout.jsx` with `Outlet` for shared UI structure
 
-## Navigation UX
+---
 
-- Added organized navigation in the header
-- Used NavLink so active routes are visually highlighted
-- Styled the header, navigation, layout shell, and footer for cleaner structure
+### Shared Layout
 
-## API Layer Setup
+* Built reusable `Header`, `Footer`, and `Layout` components
+* Structured consistent UI across all routes
 
-- Created a centralized Axios instance in src/api/api.js
-- Configured baseURL from environment variables
-- Enabled withCredentials for cookie-based authentication support
+---
 
-## Environment Variable Setup
+### Navigation UX
 
-- Added frontend environment configuration using Vite
-- Connected the frontend to the backend using VITE_API_URL
+* Implemented navigation using `NavLink`
+* Added active route highlighting
+* Styled header and layout for clean user experience
 
-## First Frontend-to-Backend API Test
+---
 
-- Successfully tested communication between frontend and backend using the /health endpoint
-- Verified the frontend can make requests and receive JSON responses
+### API Layer Setup
 
-## User Registration Flow
+* Created centralized Axios instance (`src/api/api.js`)
+* Configured dynamic `baseURL` via environment variables
+* Enabled `withCredentials` for cookie-based authentication
 
-- Built a controlled registration form using React state
-- Captured full name, email, and password
-- Sent a POST request to the backend register endpoint
-- Successfully received backend response confirming user creation
+---
 
-## What I Learned So Far
+### Environment Configuration
 
-- React Router structure and routing flow
-- Difference between Link and NavLink
-- Layout component architecture using Outlet
-- Separation of concerns in frontend folder structure
-- Axios baseURL behavior and request composition
-- Backend route mounting and path composition
-- Vite environment variable usage
-- Controlled form handling in React
-- Sending data from frontend to backend using api.post()
+* Configured environment variables using Vite
+* Connected frontend to backend via `VITE_API_URL`
+
+---
+
+### Frontend ↔ Backend Communication
+
+* Successfully tested API communication using `/health` endpoint
+* Verified JSON request/response cycle
+
+---
+
+### User Registration Flow
+
+* Built controlled form using React state
+* Captured full name, email, and password
+* Sent POST request to `/auth/register`
+* Successfully handled backend response
+
+---
+
+### User Login Flow
+
+* Built controlled login form using React state
+* Sent POST request to `/auth/login`
+* Backend returns JWT stored in HTTP-only cookies
+* Enabled session persistence using `withCredentials`
+* Verified authentication cookie is stored and persists across refresh
+
+---
+
+## What I Learned
+
+* React Router architecture and nested routing patterns
+* Differences between `Link` and `NavLink`
+* Layout composition using `Outlet`
+* Frontend folder structuring for scalability
+* Axios configuration and credential handling
+* Backend route composition and mounting
+* Environment variable management in Vite
+* Controlled components and form state management
+* End-to-end frontend-to-backend data flow
+
+---
 
 ## API Relationship Example
 
-- Frontend request uses /auth/register
-- Backend mounts routes with app.use("/auth", authRoutes)
-- Router defines route with router.post("/register")
-- Final endpoint becomes /auth/register
+* Frontend request → `/auth/login`
+* Backend mount → `app.use("/auth", authRoutes)`
+* Route definition → `router.post("/login")`
+* Final endpoint → `/auth/login`
+
+---
 
 ## How to Run the Frontend
 
-- Install dependencies with npm install
-- Create a .env file in the project root with VITE_API_URL
-- Start the development server using npm run dev
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Create a `.env` file in the root:
+
+```env
+VITE_API_URL=http://localhost:5000
+```
+
+3. Start development server:
+
+```bash
+npm run dev
+```
+
+---
 
 ## Important Notes
 
-- .env should not be committed to GitHub
-- node_modules should remain ignored
-- frontend and backend are separate repositories
-- backend must be running locally for API requests to work
+* `.env` is excluded from version control
+* `node_modules` is ignored
+* Frontend and backend are separate repositories
+* Backend must be running for API requests to succeed
 
-## Next Step
+---
 
--Implement login flow with authentication handling
+## Next Steps
+
+* Implement protected routes (authentication-based routing)
+* Build user session handling (persisted auth state)
+* Add logout functionality (clear auth cookie)
+* Begin Places feature (Airbnb listings)
+
+---
 
 ## Author
 
-- Built by Jackson Jacque
+* Built by Jackson Jacque
