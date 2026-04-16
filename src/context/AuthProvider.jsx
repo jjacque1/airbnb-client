@@ -15,7 +15,7 @@ export function AuthProvider({ children }) {
         console.error(error);
         setUser(null);
       } finally {
-        setLoading(false);
+        setLoading(false);  
       }
     }
 
