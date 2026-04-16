@@ -10,7 +10,7 @@ export function AuthProvider({ children }) {
     async function fetchUser() {
       try {
         const response = await api.get("/auth/profile");
-        setUser(response.data);
+        setUser(response.data.user);
       } catch (error) {
         console.error(error);
         setUser(null);
