@@ -43,6 +43,15 @@
   transition: background-color 0.2s ease;
 }
 
+button {
+  text-decoration: none;
+  color: #222;
+  font-weight: bold;
+  padding: 10px 16px;
+  border-radius: 999px;
+  transition: background-color 0.2s ease;
+}
+
 .main-nav a.active {
   background-color: black;
   color: white;
