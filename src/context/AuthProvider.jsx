@@ -15,15 +15,26 @@ export function AuthProvider({ children }) {
         console.error(error);
         setUser(null);
       } finally {
-        setLoading(false);  
+        setLoading(false);
       }
     }
 
     fetchUser();
   }, []);
 
+  async function logout() {
+    try {
+      await api.post("/auth/logout");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setUser(null);
+    }
+  }
+
+
   return (
-    <AuthContext.Provider value={{ user, setUser, loading }}>
+    <AuthContext.Provider value={{ user, setUser, loading, logout }}>
       {children}
     </AuthContext.Provider>
   );

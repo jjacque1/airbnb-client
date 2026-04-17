@@ -1,9 +1,14 @@
 import { useState } from "react";
 import api from "../api/api";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { setUser } = useContext(AuthContext)
+  const navigate = useNavigate()
 
   async function handleLogin(event) {
     event.preventDefault();
@@ -14,6 +19,9 @@ export default function LoginPage() {
         password,
       });
 
+      setUser(response.data.user)
+      navigate("/profile")
+
       setEmail("");
       setPassword("");
 
@@ -23,10 +31,11 @@ export default function LoginPage() {
     }
   }
 
+
   return (
     <form onSubmit={handleLogin}>
       <header>
-        <h1>Login in</h1>
+        <h1>Login</h1>
       </header>
       <div>
         <label htmlFor="email">Email: </label>
@@ -50,7 +59,7 @@ export default function LoginPage() {
           }}
         />
       </div>
-      <button type="submit">Login in</button>
+      <button type="submit">Login</button>
     </form>
   );
 }

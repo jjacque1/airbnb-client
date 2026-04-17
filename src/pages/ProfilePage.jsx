@@ -1,10 +1,19 @@
 import { AuthContext } from "../context/AuthContext"
 import { useContext } from "react"
+import { useNavigate } from "react-router-dom"
 
 
 export default function ProfilePage(){
 
-    const { user } = useContext(AuthContext)
+    const { user, logout } = useContext(AuthContext)
+    const navigate = useNavigate()
+
+    async function handleLogout(){
+        await logout()
+        return (
+            navigate("/login")
+        )
+    }
 
     if(!user){
         return <p>Loading profile...</p>
@@ -18,6 +27,9 @@ export default function ProfilePage(){
             <div>
                 <p>Email: {user.email}</p>
             </div>
+            <button onClick={handleLogout}>
+                Logout
+            </button>
         </div>
     )
 }
