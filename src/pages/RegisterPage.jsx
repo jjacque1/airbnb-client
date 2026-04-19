@@ -1,10 +1,12 @@
 import { useState } from "react";
 import api from "../api/api";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterPage() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   async function handleRegister(event) {
     event.preventDefault();
@@ -16,6 +18,8 @@ export default function RegisterPage() {
       });
 
       console.log("Register success:", response.data);
+
+      navigate("/login");
 
       setFullName("");
       setEmail("");
