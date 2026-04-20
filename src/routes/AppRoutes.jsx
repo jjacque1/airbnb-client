@@ -5,6 +5,7 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import ProfilePage from "../pages/ProfilePage";
 import ProtectedRoute from "../components/ProtectedRoute";
+import AddPlacePage from "../pages/AddPlacePage";
 
 export default function AppRoutes() {
   return (
@@ -18,6 +19,14 @@ export default function AppRoutes() {
           element={
             <ProtectedRoute>
               <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/places/new"
+          element={
+            <ProtectedRoute>
+              <AddPlacePage />
             </ProtectedRoute>
           }
         />
