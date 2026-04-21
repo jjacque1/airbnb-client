@@ -6,6 +6,7 @@ import RegisterPage from "../pages/RegisterPage";
 import ProfilePage from "../pages/ProfilePage";
 import ProtectedRoute from "../components/ProtectedRoute";
 import AddPlacePage from "../pages/AddPlacePage";
+import UserPlacesPage from "../pages/UserPlacesPage";
 
 export default function AppRoutes() {
   return (
@@ -23,10 +24,18 @@ export default function AppRoutes() {
           }
         />
         <Route
-          path="/places/new"
+          path="/user/places/new"
           element={
             <ProtectedRoute>
               <AddPlacePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/user/places"
+          element={
+            <ProtectedRoute>
+              <UserPlacesPage />
             </ProtectedRoute>
           }
         />

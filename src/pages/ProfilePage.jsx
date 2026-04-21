@@ -1,35 +1,44 @@
-import { AuthContext } from "../context/AuthContext"
-import { useContext } from "react"
-import { useNavigate } from "react-router-dom"
+import { AuthContext } from "../context/AuthContext";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
+export default function ProfilePage() {
+  const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-export default function ProfilePage(){
+  async function handleLogout() {
+    await logout();
+    navigate("/login");
+  }
 
-    const { user, logout } = useContext(AuthContext)
-    const navigate = useNavigate()
+  function handleCreateUserListing() {
+    navigate("/user/places/new");
+  }
 
-    async function handleLogout(){
-        await logout()
-        return (
-            navigate("/login")
-        )
-    }
+  function handleAllUserListings() {
+    navigate("/user/places");
+  }
 
-    if(!user){
-        return <p>Loading profile...</p>
-    }
+  if (!user) {
+    return <p>Loading profile...</p>;
+  }
 
-    return (
-        <div>
-            <header>
-                <h1>Welcome {user.fullName}</h1>
-            </header>
-            <div>
-                <p>Email: {user.email}</p>
-            </div>
-            <button onClick={handleLogout}>
-                Logout
-            </button>
-        </div>
-    )
+  return (
+    <div className="profile-page">
+      <h1>Welcome {user.fullName}</h1>
+      <p>Email: {user.email}</p>
+
+      <div className="profile-page-actions">
+        <button onClick={handleCreateUserListing}>
+          Create a Listing
+        </button>
+        <button onClick={handleAllUserListings}>
+          All Listings
+        </button>
+        <button onClick={handleLogout}>
+          Logout
+        </button>
+      </div>
+    </div>
+  );
 }
