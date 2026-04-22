@@ -17,6 +17,24 @@ export default function UserPlacesPage() {
     fetchUserPlaces();
   }, []);
 
+  async function handleDeletePlace(placeId) {
+    try {
+      const isConfirmed = window.confirm(
+        "Are you sure you want to delete this listing?",
+      );
+
+      if (!isConfirmed) return;
+
+      await api.delete(`/places/${placeId}`);
+
+      setPlaces((prevPlace) =>
+        prevPlace.filter((place) => place._id !== placeId),
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <div className="user-places-page">
       <h1 className="user-places-title">User Listings</h1>
@@ -36,6 +54,12 @@ export default function UserPlacesPage() {
                 <h3 className="place-card-title">{place.title}</h3>
                 <p className="place-card-address">{place.address}</p>
                 <p className="place-card-price">${place.price}</p>
+                <button
+                  onClick={() => handleDeletePlace(place._id)}
+                  className="place-card-delete-btn"
+                >
+                  Delete listing
+                </button>
               </div>
             </div>
           ))

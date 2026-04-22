@@ -3,13 +3,8 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function ProfilePage() {
-  const { user, logout } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-
-  async function handleLogout() {
-    await logout();
-    navigate("/login");
-  }
 
   function handleCreateUserListing() {
     navigate("/user/places/new");
@@ -29,15 +24,8 @@ export default function ProfilePage() {
       <p>Email: {user.email}</p>
 
       <div className="profile-page-actions">
-        <button onClick={handleCreateUserListing}>
-          Create a Listing
-        </button>
-        <button onClick={handleAllUserListings}>
-          All Listings
-        </button>
-        <button onClick={handleLogout}>
-          Logout
-        </button>
+        <button onClick={handleCreateUserListing}>Create a Listing</button>
+        <button onClick={handleAllUserListings}>All Listings</button>
       </div>
     </div>
   );
