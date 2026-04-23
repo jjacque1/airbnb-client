@@ -7,6 +7,7 @@ import ProfilePage from "../pages/ProfilePage";
 import ProtectedRoute from "../components/ProtectedRoute";
 import AddPlacePage from "../pages/AddPlacePage";
 import UserPlacesPage from "../pages/UserPlacesPage";
+import EditPlacePage from "../pages/EditPlacePage";
 
 export default function AppRoutes() {
   return (
@@ -36,6 +37,14 @@ export default function AppRoutes() {
           element={
             <ProtectedRoute>
               <UserPlacesPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/user/places/:id/edit"
+          element={
+            <ProtectedRoute>
+              <EditPlacePage />
             </ProtectedRoute>
           }
         />

@@ -1,8 +1,10 @@
 import api from "../api/api";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function UserPlacesPage() {
   const [places, setPlaces] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchUserPlaces() {
@@ -35,6 +37,10 @@ export default function UserPlacesPage() {
     }
   }
 
+  function handleEditPlace(placeId) {
+    navigate(`/user/places/${placeId}/edit`);
+  }
+
   return (
     <div className="user-places-page">
       <h1 className="user-places-title">User Listings</h1>
@@ -59,6 +65,12 @@ export default function UserPlacesPage() {
                   className="place-card-delete-btn"
                 >
                   Delete listing
+                </button>
+                <button
+                  onClick={() => handleEditPlace(place._id)}
+                  className="place-card-edit-btn"
+                >
+                  Edit
                 </button>
               </div>
             </div>
