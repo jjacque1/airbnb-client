@@ -45,6 +45,8 @@ export default function UserPlacesPage() {
     navigate(`/user/places/${placeId}/edit`);
   }
 
+  
+
   if (loading) {
     return (
       <div className="user-places-page">

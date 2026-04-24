@@ -23,9 +23,7 @@ export default function AddPlacePage() {
     if (checked) {
       setPerks((prevPerks) => [...prevPerks, name]);
     } else {
-      setPerks((prevPerks) =>
-        prevPerks.filter((perk) => perk !== name)
-      );
+      setPerks((prevPerks) => prevPerks.filter((perk) => perk !== name));
     }
   }
 
@@ -36,6 +34,12 @@ export default function AddPlacePage() {
 
     setPhotos((prevPhotos) => [...prevPhotos, photoLink]);
     setPhotoLink("");
+  }
+
+  function handleRemovePhoto(indexToRemove) {
+    setPhotos((prevPhotos) =>
+      prevPhotos.filter((_, index) => index !== indexToRemove),
+    );
   }
 
   async function handleSubmit(event) {
@@ -110,16 +114,20 @@ export default function AddPlacePage() {
           </button>
         </div>
 
-        <div className="photo-preview-grid">
-          {photos.map((photo, index) => (
-            <img
-              key={index}
-              src={photo}
-              alt="place"
-              className="placeIMG"
-            />
-          ))}
-        </div>
+        {photos.map((photo, index) => (
+          <div key={index} className="photo-item">
+            <img src={photo} alt="place" className="placeIMG" />
+
+            <button
+              type="button"
+              className="remove-photo-btn"
+              onClick={() => handleRemovePhoto(index)}
+            >
+              Remove
+            </button>
+            <i class="fa-duotone fa-solid fa-circle-x"></i>
+          </div>
+        ))}
       </div>
 
       {/* Title */}
