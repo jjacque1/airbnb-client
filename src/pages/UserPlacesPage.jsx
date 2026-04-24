@@ -51,7 +51,7 @@ export default function UserPlacesPage() {
         <h1 className="user-places-title">User Listings</h1>
 
         <div className="user-places-list">
-          {[1, 2, 3].map((_, index) => (
+          {[1, 2, 3, 4].map((_, index) => (
             <div key={index} className="place-card skeleton-card">
               <div className="place-card-image skeleton-image"></div>
 
