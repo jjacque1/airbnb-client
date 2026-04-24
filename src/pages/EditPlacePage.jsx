@@ -197,6 +197,65 @@ export default function EditPlacePage() {
             />
             TV
           </label>
+          <label>
+            <input
+              type="checkbox"
+              name="pets"
+              checked={perks.includes("pets")}
+              onChange={handlePerksChange}
+            />
+            Pets allowed
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              name="entrance"
+              checked={perks.includes("entrance")}
+              onChange={handlePerksChange}
+            />
+            Private entrance
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              name="kitchen"
+              checked={perks.includes("kitchen")}
+              onChange={handlePerksChange}
+            />
+            Kitchen
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              name="ac"
+              checked={perks.includes("ac")}
+              onChange={handlePerksChange}
+            />
+            Air conditioning
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              name="pool"
+              checked={perks.includes("pool")}
+              onChange={handlePerksChange}
+            />
+            Pool
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              name="washer"
+              checked={perks.includes("washer")}
+              onChange={handlePerksChange}
+            />
+            Washer
+          </label>
         </div>
       </div>
 
@@ -259,7 +318,9 @@ export default function EditPlacePage() {
         />
       </div>
 
-      <button type="submit">Submit</button>
+      <button type="submit" className="form-submit-btn">
+        Save Changes
+      </button>
     </form>
   );
 }

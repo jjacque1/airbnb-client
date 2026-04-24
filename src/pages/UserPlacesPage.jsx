@@ -45,8 +45,6 @@ export default function UserPlacesPage() {
     navigate(`/user/places/${placeId}/edit`);
   }
 
-  
-
   if (loading) {
     return (
       <div className="user-places-page">
@@ -94,18 +92,21 @@ export default function UserPlacesPage() {
               <h3 className="place-card-title">{place.title}</h3>
               <p className="place-card-address">{place.address}</p>
               <p className="place-card-price">${place.price}</p>
-              <button
-                onClick={() => handleDeletePlace(place._id)}
-                className="place-card-delete-btn"
-              >
-                Delete listing
-              </button>
-              <button
-                onClick={() => handleEditPlace(place._id)}
-                className="place-card-edit-btn"
-              >
-                Edit
-              </button>
+              <div className="place-card-actions">
+                <button
+                  onClick={() => handleEditPlace(place._id)}
+                  className="place-card-edit-btn"
+                >
+                  Edit
+                </button>
+
+                <button
+                  onClick={() => handleDeletePlace(place._id)}
+                  className="place-card-delete-btn"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           </div>
         ))}

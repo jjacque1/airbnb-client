@@ -261,7 +261,9 @@ export default function AddPlacePage() {
         />
       </div>
 
-      <button type="submit">Submit</button>
+      <button type="submit" className="form-submit-btn">
+        Create Listing
+      </button>
     </form>
   );
 }
