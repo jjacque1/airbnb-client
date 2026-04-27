@@ -85,7 +85,7 @@ export default function EditPlacePage() {
         setTitle(placeData.title);
         setAddress(placeData.address);
         setDescription(placeData.description);
-        setPerks(placeData.perks);
+        setPerks(placeData.perks || []);
         setExtraInfo(placeData.extraInfo);
         setCheckIn(placeData.checkIn);
         setCheckOut(placeData.checkOut);
@@ -167,7 +167,7 @@ export default function EditPlacePage() {
       <div className="add-place-form-group">
         <p>Amenities</p>
 
-        <div className="perks-group">
+        <div className="perks-grid">
           <label>
             <input
               type="checkbox"

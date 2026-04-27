@@ -156,22 +156,25 @@ textarea {
   display: block;
 }
 
-.perks-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
+.perks-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 20px;
+  margin-top: 10px;
 }
 
-.perks-group label {
+.perks-grid label {
   display: flex;
   align-items: center;
   gap: 8px;
   font-weight: 500;
+  cursor: pointer;
 }
 
-.perks-group input[type="checkbox"] {
+.perks-grid input[type="checkbox"] {
   width: auto;
   margin-top: 0;
+  cursor: pointer;
 }
 
 .photo-item {
@@ -299,6 +302,13 @@ textarea {
   overflow: hidden;
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+.place-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 .place-card-image {
@@ -332,6 +342,88 @@ textarea {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+/* Place Details pages */
+
+/* Place details page */
+.place-details-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.place-details-title {
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.place-details-address {
+  color: #555;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.place-details-card {
+  background-color: white;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.place-img-wrapper {
+  width: 100%;
+  background-color: #f2f2f2;
+}
+
+.place-detail-main-photo {
+  width: 100%;
+  height: 420px;
+}
+
+.place-detail-main-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.place-details-body {
+  padding: 2rem;
+}
+
+.place-details-body h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.place-details-body h3:first-child {
+  margin-top: 0;
+}
+
+.place-details-body p {
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.place-details-body ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
+  margin-top: 0.75rem;
+}
+
+.place-details-body li {
+  background-color: #f7f7f7;
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 0.95rem;
+  color: #333;
 }
 
 /* Auth pages */

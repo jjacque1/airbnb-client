@@ -169,7 +169,7 @@ export default function AddPlacePage() {
       <div className="add-place-form-group">
         <p>Amenities</p>
 
-        <div className="perks-group">
+        <div className="perks-grid">
           <label>
             <input
               type="checkbox"

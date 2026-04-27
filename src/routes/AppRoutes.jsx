@@ -8,6 +8,7 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import AddPlacePage from "../pages/AddPlacePage";
 import UserPlacesPage from "../pages/UserPlacesPage";
 import EditPlacePage from "../pages/EditPlacePage";
+import PlaceDetailsPage from "../pages/PlaceDetailsPage";
 
 export default function AppRoutes() {
   return (
@@ -48,6 +49,7 @@ export default function AppRoutes() {
             </ProtectedRoute>
           }
         />
+        <Route path="places/:id" element={<PlaceDetailsPage/>} />
       </Route>
     </Routes>
   );

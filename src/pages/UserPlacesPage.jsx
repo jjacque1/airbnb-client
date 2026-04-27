@@ -82,7 +82,11 @@ export default function UserPlacesPage() {
 
       <div className="user-places-list">
         {places.map((place) => (
-          <div key={place._id} className="place-card">
+          <div
+            key={place._id}
+            className="place-card"
+            onClick={() => navigate(`/places/${place._id}`)}
+          >
             <img
               src={place.photos[0]}
               alt={place.title}
@@ -94,14 +98,19 @@ export default function UserPlacesPage() {
               <p className="place-card-price">${place.price}</p>
               <div className="place-card-actions">
                 <button
-                  onClick={() => handleEditPlace(place._id)}
-                  className="place-card-edit-btn"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    handleEditPlace(place._id);
+                  }}
                 >
                   Edit
                 </button>
 
                 <button
-                  onClick={() => handleDeletePlace(place._id)}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    handleDeletePlace(place._id);
+                  }}
                   className="place-card-delete-btn"
                 >
                   Delete
