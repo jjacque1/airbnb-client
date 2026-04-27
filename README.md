@@ -8,26 +8,26 @@ This is the frontend for my Airbnb Clone project, built with React and Vite. It 
 
 At this stage, the frontend includes:
 
-* React application initialized with Vite
-* Production-style folder structure with separation of concerns
-* React Router configuration with nested routing
-* Shared layout using Header, Footer, and Outlet
-* Navigation with active route styling using `NavLink`
-* Centralized Axios API client with credential support
-* Environment-based backend URL configuration using Vite `.env`
-* Successful frontend-to-backend API communication
-* Fully functional user registration flow
-* Fully functional user login flow with cookie-based authentication
+- React application initialized with Vite
+- Production-style folder structure with separation of concerns
+- React Router configuration with nested routing
+- Shared layout using Header, Footer, and Outlet
+- Navigation with active route styling using `NavLink`
+- Centralized Axios API client with credential support
+- Environment-based backend URL configuration using Vite `.env`
+- Successful frontend-to-backend API communication
+- Fully functional user registration flow
+- Fully functional user login flow with cookie-based authentication
 
 ---
 
 ## Tech Stack
 
-* React
-* Vite
-* React Router DOM
-* Axios
-* CSS
+- React
+- Vite
+- React Router DOM
+- Axios
+- CSS
 
 ---
 
@@ -41,156 +41,153 @@ src
 ├── components
 │   ├── Footer.jsx
 │   ├── Header.jsx
-│   └── Layout.jsx
+│   ├── Layout.jsx
+│   └── ProtectedRoute.jsx
+├── context
+│   └── AuthContext.jsx
+|   |__ AuthPrrovider.jsx
 ├── pages
 │   ├── HomePage.jsx
 │   ├── LoginPage.jsx
-│   └── RegisterPage.jsx
+│   ├── RegisterPage.jsx
+│   ├── ProfilePage.jsx
+│   ├── AddPlacePage.jsx
+│   ├── EditPlacePage.jsx
+│   ├── UserPlacesPage.jsx
+│   └── PlaceDetailsPage.jsx
 ├── routes
 │   └── AppRoutes.jsx
 ├── App.jsx
 └── main.jsx
+|__ App.css
+|__ index.css
 ```
 
 ---
 
 ## Features Implemented
 
-### App Bootstrapping
+### Authentication System
 
-* Initialized frontend using Vite
-* Configured React rendering via `main.jsx`
-* Wrapped application with `BrowserRouter`
-
----
+- User registration and login with controlled React forms
+- JWT-based authentication using HTTP-only cookies
+- Session persistence across page refresh
+- Logout functionality with cookie clearing
+- Global auth state managed via Context API
 
 ### Routing Architecture
 
-* Extracted route definitions into `AppRoutes.jsx`
-* Implemented page-based routing (Home, Login, Register)
-* Used `Layout.jsx` with `Outlet` for shared UI structure
+- Nested routing using React Router
+- Shared layout with Header, Footer, and Outlet
+- Protected routes for authenticated pages
+- Public routes for listing browsing
 
----
+### API Layer
 
-### Shared Layout
+- Centralized Axios instance (api.js)
+- Dynamic base URL using environment variables
+- withCredentials: true for secure cookie-based authentication
 
-* Built reusable `Header`, `Footer`, and `Layout` components
-* Structured consistent UI across all routes
+### Listings (Places) System
 
----
+#### - Create Listing
+- Controlled form with dynamic state management
+- Photo URL input with add/remove functionality
+- Amenities selection using checkbox system
+- Form validation before submission
+- POST request to /places
+### Edit Listing
 
-### Navigation UX
+- Pre-filled form using fetched data
+- Controlled updates with PATCH requests
+- Dynamic state hydration from backend
+- Photo management (add/remove)
 
-* Implemented navigation using `NavLink`
-* Added active route highlighting
-* Styled header and layout for clean user experience
+### Delete Listing
 
----
+- Delete action with confirmation prompt
+- Optimistic UI update using state filtering
+- DELETE request to /places/:id
 
-### API Layer Setup
+### User Listings Dashboard
 
-* Created centralized Axios instance (`src/api/api.js`)
-* Configured dynamic `baseURL` via environment variables
-* Enabled `withCredentials` for cookie-based authentication
+- Fetches authenticated user listings (/places/user-places)
+- Displays listings in responsive card layout
+- Conditional rendering (loading, empty state, data)
+- Skeleton loading UI for improved UX
 
----
+### Listing Details Page
 
-### Environment Configuration
+- Dynamic route: /places/:id
+- Fetch single listing by ID
+- Displays:
+    - Title
+    - Address
+    - Main image
+    - Description
+    - Price
+    - Amenities
+- Handles loading and error states
 
-* Configured environment variables using Vite
-* Connected frontend to backend via `VITE_API_URL`
+### UI/UX Enhancements
 
----
+- Skeleton loading states for data fetching
+- Hover interactions and clickable cards
+- Button interaction feedback (hover/transform)
+- Responsive card layouts
+- Clean form structure and spacing
+- Reusable styling system
 
-### Frontend ↔ Backend Communication
+### What I Learned
 
-* Successfully tested API communication using `/health` endpoint
-* Verified JSON request/response cycle
+- Building production-style React architecture
+- Managing global vs local state (Context vs component state)
+- Handling authentication with cookies and protected routes
+- Designing scalable folder structures
+- Implementing full CRUD flows in frontend
+- Managing controlled forms and complex state updates
+- Handling async data fetching and loading states
+- Understanding event bubbling and stopPropagation
+- Designing user-friendly UI/UX patterns
 
----
+### API Relationship Example
 
-### User Registration Flow
+- Frontend request → /places/:id
+- Backend mount → app.use("/places", placeRoutes)
+- Route definition → router.get("/:id")
+- Final endpoint → /places/:id
 
-* Built controlled form using React state
-* Captured full name, email, and password
-* Sent POST request to `/auth/register`
-* Successfully handled backend response
-
----
-
-### User Login Flow
-
-* Built controlled login form using React state
-* Sent POST request to `/auth/login`
-* Backend returns JWT stored in HTTP-only cookies
-* Enabled session persistence using `withCredentials`
-* Verified authentication cookie is stored and persists across refresh
-
----
-
-## What I Learned
-
-* React Router architecture and nested routing patterns
-* Differences between `Link` and `NavLink`
-* Layout composition using `Outlet`
-* Frontend folder structuring for scalability
-* Axios configuration and credential handling
-* Backend route composition and mounting
-* Environment variable management in Vite
-* Controlled components and form state management
-* End-to-end frontend-to-backend data flow
-
----
-
-## API Relationship Example
-
-* Frontend request → `/auth/login`
-* Backend mount → `app.use("/auth", authRoutes)`
-* Route definition → `router.post("/login")`
-* Final endpoint → `/auth/login`
-
----
-
-## How to Run the Frontend
+### How to Run the Frontend
 
 1. Install dependencies:
-
-```bash
+```
 npm install
 ```
-
-2. Create a `.env` file in the root:
-
-```env
+2. Create a .env file in the root:
+```
 VITE_API_URL=http://localhost:5000
 ```
-
 3. Start development server:
-
-```bash
+```
 npm run dev
 ```
+### Important Notes
 
----
+- .env is excluded from version control
+- node_modules is ignored
+- Frontend and backend are separate repositories (polyrepo setup)
+- Backend must be running for API requests to succeed
 
-## Important Notes
+### Next Steps
 
-* `.env` is excluded from version control
-* `node_modules` is ignored
-* Frontend and backend are separate repositories
-* Backend must be running for API requests to succeed
-
----
-
-## Next Steps
-
-* Implement protected routes (authentication-based routing)
-* Build user session handling (persisted auth state)
-* Add logout functionality (clear auth cookie)
-* Begin Places feature (Airbnb listings)
-
----
+- Booking system (create and manage reservations)
+- Availability and date conflict handling
+- Listing image gallery improvements
+- Search and filtering system
+- Pagination or infinite scroll
+- Deployment (Vercel + Render)
 
 ## Author
 
-* Built by Jackson Jacque
+Jackson Jacque
+Full Stack MERN Developer
