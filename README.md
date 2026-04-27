@@ -189,5 +189,5 @@ npm run dev
 
 ## Author
 
-Jackson Jacque
+Jackson Jacque |
 Full Stack MERN Developer
