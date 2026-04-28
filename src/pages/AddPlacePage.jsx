@@ -125,7 +125,6 @@ export default function AddPlacePage() {
             >
               Remove
             </button>
-            <i class="fa-duotone fa-solid fa-circle-x"></i>
           </div>
         ))}
       </div>

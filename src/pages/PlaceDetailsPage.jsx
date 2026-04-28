@@ -7,6 +7,11 @@ export default function PlaceDetailsPage() {
 
   const [loading, setLoading] = useState(true);
   const [place, setPlace] = useState(null);
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
+  const [numberOfGuests, setNumberOfGuests] = useState(1);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
 
   useEffect(() => {
     async function fetchPlace() {
@@ -79,6 +84,64 @@ export default function PlaceDetailsPage() {
               ))}
             </ul>
           )}
+        </div>
+        <div className="booking-card">
+          <h3>
+            From ${place.price} <span> per night</span>
+          </h3>
+          <div>
+            <label htmlFor="check-in">
+              CHECK-IN
+              <input
+                type="date"
+                id="check-in"
+                value={checkIn}
+                onChange={(event) => setCheckIn(event.target.value)}
+              />
+            </label>
+            <label htmlFor="check-out">
+              CHECK-OUT
+              <input
+                type="date"
+                id="check-out"
+                value={checkOut}
+                onChange={(event) => setCheckOut(event.target.value)}
+              />
+            </label>
+            <label htmlFor="guests">
+              GUESTS
+              <input
+                type="number"
+                id="guests"
+                min={1}
+                placeholder="1 guest"
+                value={numberOfGuests}
+                onChange={(event) => setNumberOfGuests(event.target.value)}
+              />
+            </label>
+            <label htmlFor="name">
+              NAME
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+              />
+            </label>
+            <label htmlFor="phone">
+              PHONE
+              <input
+                type="tel"
+                id="phone"
+                value={phone}
+                onChange={(event) => setPhone(event.target.value)}
+              />
+            </label>
+          </div>
+          <div>
+            <button type="button">Reserve</button>
+            <p>You won't be charged yet</p>
+          </div>
         </div>
       </div>
     </div>

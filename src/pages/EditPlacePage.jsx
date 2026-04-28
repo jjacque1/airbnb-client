@@ -38,6 +38,12 @@ export default function EditPlacePage() {
     setPhotoLink("");
   }
 
+  function handleRemovePhoto(indexToRemove) {
+    setPhotos((prevPhotos) =>
+      prevPhotos.filter((_, index) => index !== indexToRemove),
+    );
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -121,11 +127,19 @@ export default function EditPlacePage() {
           </button>
         </div>
 
-        <div className="photo-preview-grid">
-          {photos.map((photo, index) => (
-            <img key={index} src={photo} alt="place" className="placeIMG" />
-          ))}
-        </div>
+        {photos.map((photo, index) => (
+          <div key={index} className="photo-item">
+            <img src={photo} alt="place" className="placeIMG" />
+
+            <button
+              type="button"
+              className="remove-photo-btn"
+              onClick={() => handleRemovePhoto(index)}
+            >
+              Remove
+            </button>
+          </div>
+        ))}
       </div>
 
       {/* Title */}

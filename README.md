@@ -45,7 +45,7 @@ src
 │   └── ProtectedRoute.jsx
 ├── context
 │   └── AuthContext.jsx
-|   |__ AuthPrrovider.jsx
+|   |__ AuthProvider.jsx
 ├── pages
 │   ├── HomePage.jsx
 │   ├── LoginPage.jsx
