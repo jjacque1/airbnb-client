@@ -13,6 +13,20 @@ export default function PlaceDetailsPage() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
 
+  let numberOfNights = 0;
+
+  if (checkIn && checkOut) {
+    const checkInDate = new Date(checkIn);
+    const checkOutDate = new Date(checkOut);
+
+    const timeDifference = checkOutDate - checkInDate;
+
+
+    numberOfNights = timeDifference / (1000 * 60 * 60 * 24);
+  }
+
+  const totalPrice = numberOfNights * place?.price;
+
   useEffect(() => {
     async function fetchPlace() {
       try {
@@ -137,6 +151,13 @@ export default function PlaceDetailsPage() {
                 onChange={(event) => setPhone(event.target.value)}
               />
             </label>
+          </div>
+          <div>
+            {numberOfNights > 0 && (
+              <p>
+                ${place.price} x {numberOfNights} nights = ${totalPrice}
+              </p>
+            )}
           </div>
           <div>
             <button type="button">Reserve</button>
