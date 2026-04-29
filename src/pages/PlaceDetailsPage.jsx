@@ -21,11 +21,43 @@ export default function PlaceDetailsPage() {
 
     const timeDifference = checkOutDate - checkInDate;
 
-
     numberOfNights = timeDifference / (1000 * 60 * 60 * 24);
   }
 
   const totalPrice = numberOfNights * place?.price;
+
+  async function handleBooking(event) {
+    event.preventDefault();
+
+    if (!checkIn || !checkOut || !numberOfGuests || !name || !phone) {
+      console.log(
+        "checkIn, checkOut, numberOfGuests, name, phone are required to book",
+      );
+      return;
+    }
+
+    if (numberOfNights <= 0) {
+      console.log("Invalid date range");
+      return;
+    }
+
+    const bookingData = {
+      place: place._id,
+      checkIn,
+      checkOut,
+      numberOfGuests: Number(numberOfGuests),
+      name,
+      phone,
+      price: totalPrice,
+    };
+
+    try {
+      const response = await api.post("/bookings", bookingData);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error.response?.data || error);
+    }
+  }
 
   useEffect(() => {
     async function fetchPlace() {
@@ -99,7 +131,10 @@ export default function PlaceDetailsPage() {
             </ul>
           )}
         </div>
-        <div className="booking-card">
+
+        {/* Booking form */}
+
+        <form className="booking-card" onSubmit={handleBooking}>
           <h3>
             From ${place.price} <span> per night</span>
           </h3>
@@ -159,11 +194,9 @@ export default function PlaceDetailsPage() {
               </p>
             )}
           </div>
-          <div>
-            <button type="button">Reserve</button>
-            <p>You won't be charged yet</p>
-          </div>
-        </div>
+
+          <button type="submit">Reserve</button>
+        </form>
       </div>
     </div>
   );
