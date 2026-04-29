@@ -12,13 +12,14 @@ export default function PlaceDetailsPage() {
   const [numberOfGuests, setNumberOfGuests] = useState(1);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   let numberOfNights = 0;
 
   if (checkIn && checkOut) {
     const checkInDate = new Date(checkIn);
     const checkOutDate = new Date(checkOut);
-
     const timeDifference = checkOutDate - checkInDate;
 
     numberOfNights = timeDifference / (1000 * 60 * 60 * 24);
@@ -29,15 +30,16 @@ export default function PlaceDetailsPage() {
   async function handleBooking(event) {
     event.preventDefault();
 
+    setError("");
+    setSuccess("");
+
     if (!checkIn || !checkOut || !numberOfGuests || !name || !phone) {
-      console.log(
-        "checkIn, checkOut, numberOfGuests, name, phone are required to book",
-      );
+      setError("Please fill out all booking fields.");
       return;
     }
 
     if (numberOfNights <= 0) {
-      console.log("Invalid date range");
+      setError("Check-out date must be after check-in date.");
       return;
     }
 
@@ -52,10 +54,18 @@ export default function PlaceDetailsPage() {
     };
 
     try {
-      const response = await api.post("/bookings", bookingData);
-      console.log(response.data);
+      await api.post("/bookings", bookingData);
+      setSuccess("Booking created successfully!");
+      setCheckIn("");
+      setCheckOut("");
+      setNumberOfGuests(1);
+      setName("");
+      setPhone("");
     } catch (error) {
-      console.error(error.response?.data || error);
+      setError(
+        error.response?.data?.message ||
+          "Something went wrong. Please try again.",
+      );
     }
   }
 
@@ -132,12 +142,11 @@ export default function PlaceDetailsPage() {
           )}
         </div>
 
-        {/* Booking form */}
-
         <form className="booking-card" onSubmit={handleBooking}>
           <h3>
             From ${place.price} <span> per night</span>
           </h3>
+
           <div>
             <label htmlFor="check-in">
               CHECK-IN
@@ -148,6 +157,7 @@ export default function PlaceDetailsPage() {
                 onChange={(event) => setCheckIn(event.target.value)}
               />
             </label>
+
             <label htmlFor="check-out">
               CHECK-OUT
               <input
@@ -157,6 +167,7 @@ export default function PlaceDetailsPage() {
                 onChange={(event) => setCheckOut(event.target.value)}
               />
             </label>
+
             <label htmlFor="guests">
               GUESTS
               <input
@@ -168,6 +179,7 @@ export default function PlaceDetailsPage() {
                 onChange={(event) => setNumberOfGuests(event.target.value)}
               />
             </label>
+
             <label htmlFor="name">
               NAME
               <input
@@ -177,6 +189,7 @@ export default function PlaceDetailsPage() {
                 onChange={(event) => setName(event.target.value)}
               />
             </label>
+
             <label htmlFor="phone">
               PHONE
               <input
@@ -187,13 +200,15 @@ export default function PlaceDetailsPage() {
               />
             </label>
           </div>
-          <div>
-            {numberOfNights > 0 && (
-              <p>
-                ${place.price} x {numberOfNights} nights = ${totalPrice}
-              </p>
-            )}
-          </div>
+
+          {numberOfNights > 0 && (
+            <p className="booking-price-summary">
+              ${place.price} x {numberOfNights} nights = ${totalPrice}
+            </p>
+          )}
+
+          {error && <p className="form-error">{error}</p>}
+          {success && <p className="form-success">{success}</p>}
 
           <button type="submit">Reserve</button>
         </form>

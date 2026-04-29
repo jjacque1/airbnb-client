@@ -11,6 +11,11 @@ a {
   text-decoration: none;
 }
 
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
 /* Header */
 
 .app-header {
@@ -248,15 +253,11 @@ textarea {
   padding: 2rem 0;
 }
 
-.user-places-title {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-}
-
 .user-places-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  align-items: stretch;
 }
 
 .user-places-empty {
@@ -264,25 +265,25 @@ textarea {
   color: #666;
 }
 
-.place-card-delete-btn {
-  color: #ff385c;
-  border: 2px solid #ff385c;
-  border-radius: 10px;
-  margin-top: 1rem;
-}
-
 .place-card-edit-btn {
-  color: rgb(58, 70, 82);
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  margin-top: 1rem;
-}
-
-.place-card-delete-btn:hover {
-  transform: translateY(-2px);
+  background-color: white;
+  color: #222;
+  border: 1px solid #ddd;
 }
 
 .place-card-edit-btn:hover {
+  background-color: #f7f7f7;
+  transform: translateY(-2px);
+}
+
+.place-card-delete-btn {
+  background-color: white;
+  color: #ff385c;
+  border: 1px solid #ff385c;
+}
+
+.place-card-delete-btn:hover {
+  background-color: #fff0f3;
   transform: translateY(-2px);
 }
 
@@ -296,7 +297,9 @@ textarea {
 }
 
 .place-card {
-  width: 260px;
+  width: 100%;
+  height: 100%;
+  min-height: 390px;
   border: 1px solid #ddd;
   border-radius: 14px;
   overflow: hidden;
@@ -304,6 +307,8 @@ textarea {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   cursor: pointer;
   transition: all 200ms ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .place-card:hover {
@@ -311,37 +316,55 @@ textarea {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
+.place-card img,
 .place-card-image {
   width: 100%;
-  height: 180px;
+  height: 190px;
   object-fit: cover;
   display: block;
+  flex-shrink: 0;
 }
 
 .place-card-body {
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .place-card-title {
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
+  line-height: 1.3;
 }
 
 .place-card-address {
   font-size: 0.95rem;
   color: #555;
   margin-bottom: 0.75rem;
+  line-height: 1.4;
 }
 
 .place-card-price {
   font-size: 1rem;
   font-weight: 600;
+  margin-top: auto;
 }
 
 .place-card-actions {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  gap: 10px;
+  padding: 0 1rem 1rem;
+  margin-top: auto;
+}
+
+.place-card-actions button {
+  flex: 1;
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
 }
 
 /* Place Details pages */
@@ -417,6 +440,64 @@ textarea {
   margin-top: 0.75rem;
 }
 
+/*Booking form styling*/
+
+.booking-card {
+  margin: 0 2rem 2rem;
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 18px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.booking-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.booking-card h3 span {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #666;
+}
+
+.booking-card label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.booking-card input {
+  margin-top: 6px;
+}
+
+.booking-card button {
+  width: 100%;
+  background-color: #ff385c;
+  color: white;
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 1rem;
+}
+
+.booking-card button:hover {
+  background-color: #e03150;
+  transform: translateY(-2px);
+}
+
+.booking-price-summary {
+  background-color: #f7f7f7;
+  padding: 12px 14px;
+  border-radius: 12px;
+  margin-top: 0.5rem;
+  font-weight: 600;
+}
+
 .place-details-body li {
   background-color: #f7f7f7;
   border: 1px solid #ddd;
@@ -424,6 +505,28 @@ textarea {
   padding: 8px 14px;
   font-size: 0.95rem;
   color: #333;
+}
+
+.form-error {
+  margin-top: 1rem;
+  color: #b00020;
+  background-color: #fff0f3;
+  border: 1px solid #ffccd5;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.form-success {
+  margin-top: 1rem;
+  color: #0f5132;
+  background-color: #d1e7dd;
+  border: 1px solid #badbcc;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
 }
 
 /* Auth pages */
@@ -521,4 +624,20 @@ textarea {
   text-align: center;
   color: #666;
   font-size: 0.95rem;
+}
+
+/* Mobile Phones */
+
+@media (max-width: 600px) {
+  .page-content {
+    padding: 24px 16px;
+  }
+
+  .user-places-list {
+    grid-template-columns: 1fr;
+  }
+
+  .place-card {
+    min-height: auto;
+  }
 }

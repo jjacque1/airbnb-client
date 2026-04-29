@@ -1,6 +1,6 @@
 import api from "../api/api";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function UserPlacesPage() {
   const [places, setPlaces] = useState([]);
@@ -82,40 +82,33 @@ export default function UserPlacesPage() {
 
       <div className="user-places-list">
         {places.map((place) => (
-          <div
-            key={place._id}
-            className="place-card"
-            onClick={() => navigate(`/places/${place._id}`)}
-          >
-            <img
-              src={place.photos[0]}
-              alt={place.title}
-              className="place-card-image"
-            />
-            <div className="place-card-body">
-              <h3 className="place-card-title">{place.title}</h3>
-              <p className="place-card-address">{place.address}</p>
-              <p className="place-card-price">${place.price}</p>
-              <div className="place-card-actions">
-                <button
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    handleEditPlace(place._id);
-                  }}
-                >
-                  Edit
-                </button>
+          <div key={place._id} className="place-card">
+            <Link
+              to={`/places/${place._id}`}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <img
+                src={place.photos[0]}
+                alt={place.title}
+                className="place-card-image"
+              />
 
-                <button
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    handleDeletePlace(place._id);
-                  }}
-                  className="place-card-delete-btn"
-                >
-                  Delete
-                </button>
+              <div className="place-card-body">
+                <h3 className="place-card-title">{place.title}</h3>
+                <p className="place-card-address">{place.address}</p>
+                <p className="place-card-price">${place.price}</p>
               </div>
+            </Link>
+
+            <div className="place-card-actions">
+              <button onClick={() => handleEditPlace(place._id)}>Edit</button>
+
+              <button
+                onClick={() => handleDeletePlace(place._id)}
+                className="place-card-delete-btn"
+              >
+                Delete
+              </button>
             </div>
           </div>
         ))}

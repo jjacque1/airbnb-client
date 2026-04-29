@@ -18,6 +18,9 @@ export default function EditPlacePage() {
   const [price, setPrice] = useState("");
   const [photos, setPhotos] = useState([]);
   const [photoLink, setPhotoLink] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   function handlePerksChange(event) {
     const { checked, name } = event.target;
@@ -47,6 +50,10 @@ export default function EditPlacePage() {
   async function handleSubmit(event) {
     event.preventDefault();
 
+    setSubmitting(true);
+    setError("");
+    setSuccess("");
+
     try {
       if (
         !title ||
@@ -58,6 +65,8 @@ export default function EditPlacePage() {
         !price ||
         photos.length === 0
       ) {
+        setError("Please fill out all fields.");
+        setSubmitting(false);
         return;
       }
 
@@ -75,10 +84,18 @@ export default function EditPlacePage() {
       };
 
       await api.patch(`/places/${id}`, updatedPlace);
+      setSuccess("Listing edited successfully");
 
-      navigate("/user/places");
+      setTimeout(() => {
+        navigate("/user/places");
+      }, 1500);
     } catch (error) {
-      console.error(error);
+      setError(
+        error.response?.data?.message ||
+          "Something went wrong. Please try again.",
+      );
+    } finally {
+      setSubmitting(false);
     }
   }
 
@@ -99,7 +116,10 @@ export default function EditPlacePage() {
         setPrice(placeData.price);
         setPhotos(placeData.photos);
       } catch (error) {
-        console.error(error);
+        setError(
+          error.response?.data?.message ||
+            "Something went wrong. Please try again.",
+        );
       }
     }
 
@@ -332,8 +352,11 @@ export default function EditPlacePage() {
         />
       </div>
 
-      <button type="submit" className="form-submit-btn">
-        Save Changes
+      {error && <p className="form-error">{error}</p>}
+      {success && <p className="form-success">{success}</p>}
+
+      <button type="submit" className="form-submit-btn" disabled={submitting}>
+        {submitting ? "Saving..." : "Save Changes"}
       </button>
     </form>
   );

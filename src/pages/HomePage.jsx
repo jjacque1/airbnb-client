@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import api from "../api/api";
 
 export default function HomePage() {
@@ -40,19 +41,26 @@ export default function HomePage() {
   return (
     <div>
       <h1>All Listings</h1>
-      {places?.length === 0 ? (
+
+      {places.length === 0 ? (
         <p>No listings available yet</p>
       ) : (
-        <div>
+        <div className="user-places-list">
           {places.map((place) => (
-            <div key={place._id} className="place-card">
-              <img src={place.photos[0]} alt={place.title} />
-              <div className="place-card-body">
-                <h3 className="place-card-title">{place.title}</h3>
-                <p className="place-card-address">{place.address}</p>
-                <p className="place-card-price">${place.price}</p>
+            <Link
+              key={place._id}
+              to={`/places/${place._id}`}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <div className="place-card">
+                <img src={place.photos[0]} alt={place.title} />
+                <div className="place-card-body">
+                  <h3 className="place-card-title">{place.title}</h3>
+                  <p className="place-card-address">{place.address}</p>
+                  <p className="place-card-price">${place.price}</p>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}
