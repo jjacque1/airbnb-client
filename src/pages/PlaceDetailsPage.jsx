@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../api/api";
+import { useNavigate } from "react-router-dom";
+import Loading from "../components/Loading";
 
 export default function PlaceDetailsPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(true);
   const [place, setPlace] = useState(null);
@@ -44,7 +47,7 @@ export default function PlaceDetailsPage() {
     }
 
     const bookingData = {
-      place: place._id,
+      place: id,
       checkIn,
       checkOut,
       numberOfGuests: Number(numberOfGuests),
@@ -61,6 +64,10 @@ export default function PlaceDetailsPage() {
       setNumberOfGuests(1);
       setName("");
       setPhone("");
+
+      setTimeout(() => {
+        navigate("/user/bookings");
+      }, 1500);
     } catch (error) {
       setError(
         error.response?.data?.message ||
@@ -86,21 +93,7 @@ export default function PlaceDetailsPage() {
   }, [id]);
 
   if (loading) {
-    return (
-      <div className="place-details-page">
-        <h1 className="place-details-title">Loading listing...</h1>
-
-        <div className="place-card skeleton-card">
-          <div className="place-card-image skeleton-image"></div>
-
-          <div className="place-card-body">
-            <div className="skeleton-text skeleton-title"></div>
-            <div className="skeleton-text skeleton-address"></div>
-            <div className="skeleton-text skeleton-price"></div>
-          </div>
-        </div>
-      </div>
-    );
+    return <Loading/>
   }
 
   if (!place) {

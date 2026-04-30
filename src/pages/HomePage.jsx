@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "../api/api";
+import Loading from "../components/Loading";
 
 export default function HomePage() {
   const [loading, setLoading] = useState(true);
@@ -23,19 +24,7 @@ export default function HomePage() {
   }, []);
 
   if (loading) {
-    return (
-      <div className="place-details-page">
-        <div className="place-card skeleton-card">
-          <div className="place-card-image skeleton-image"></div>
-
-          <div className="place-card-body">
-            <div className="skeleton-text skeleton-title"></div>
-            <div className="skeleton-text skeleton-address"></div>
-            <div className="skeleton-text skeleton-price"></div>
-          </div>
-        </div>
-      </div>
-    );
+    return <Loading/>
   }
 
   return (
@@ -57,7 +46,10 @@ export default function HomePage() {
                 <div className="place-card-body">
                   <h3 className="place-card-title">{place.title}</h3>
                   <p className="place-card-address">{place.address}</p>
-                  <p className="place-card-price">${place.price}</p>
+                  <p className="place-card-price">
+                    ${place.price}
+                    <span className="place-card-price-span"> per night</span>
+                  </p>
                 </div>
               </div>
             </Link>

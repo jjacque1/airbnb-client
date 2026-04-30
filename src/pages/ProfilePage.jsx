@@ -14,6 +14,10 @@ export default function ProfilePage() {
     navigate("/user/places");
   }
 
+  function handlebookings(){
+    navigate("/user/bookings")
+  }
+
   if (!user) {
     return <p>Loading profile...</p>;
   }
@@ -25,7 +29,8 @@ export default function ProfilePage() {
 
       <div className="profile-page-actions">
         <button onClick={handleCreateUserListing}>Create a Listing</button>
-        <button onClick={handleAllUserListings}>All Listings</button>
+        <button onClick={handleAllUserListings}>Listings</button>
+        <button onClick={handlebookings}>Bookings</button>
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ import AddPlacePage from "../pages/AddPlacePage";
 import UserPlacesPage from "../pages/UserPlacesPage";
 import EditPlacePage from "../pages/EditPlacePage";
 import PlaceDetailsPage from "../pages/PlaceDetailsPage";
+import BookingPage from "../pages/BookingsPage";
 
 export default function AppRoutes() {
   return (
@@ -49,7 +50,15 @@ export default function AppRoutes() {
             </ProtectedRoute>
           }
         />
-        <Route path="places/:id" element={<PlaceDetailsPage/>} />
+        <Route path="places/:id" element={<PlaceDetailsPage />} />
+      <Route
+        path="/user/bookings"
+        element={
+          <ProtectedRoute>
+            <BookingPage />
+          </ProtectedRoute>
+        }
+      />
       </Route>
     </Routes>
   );
