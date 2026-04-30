@@ -14,6 +14,9 @@ export default function AddPlacePage() {
   const [price, setPrice] = useState("");
   const [photos, setPhotos] = useState([]);
   const [photoLink, setPhotoLink] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const navigate = useNavigate();
 
@@ -45,6 +48,11 @@ export default function AddPlacePage() {
   async function handleSubmit(event) {
     event.preventDefault();
 
+    setSubmitting(true);
+
+    setError("");
+    setSuccess("");
+
     try {
       if (
         !title ||
@@ -56,6 +64,8 @@ export default function AddPlacePage() {
         !price ||
         photos.length === 0
       ) {
+        setError("Please fill out all fields");
+        setSubmitting(false);
         return;
       }
 
@@ -74,6 +84,8 @@ export default function AddPlacePage() {
 
       await api.post("/places", newPlace);
 
+      setSuccess("Listing created successfully");
+
       // reset form
       setTitle("");
       setAddress("");
@@ -87,9 +99,15 @@ export default function AddPlacePage() {
       setPhotos([]);
       setPhotoLink("");
 
-      navigate("/user/places");
+      setTimeout(() => {
+        navigate("/user/places");
+      }, 2500);
     } catch (error) {
       console.error(error);
+      error.response?.data?.message ||
+        "Something went wrong. Please try again.";
+    } finally {
+      setSubmitting(false);
     }
   }
 
@@ -198,6 +216,24 @@ export default function AddPlacePage() {
             />
             TV
           </label>
+          <label>
+            <input
+              type="checkbox"
+              name="kitchen"
+              checked={perks.includes("kitchen")}
+              onChange={handlePerksChange}
+            />
+            Kitchen
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              name="hottub"
+              checked={perks.includes("hottub")}
+              onChange={handlePerksChange}
+            />
+            Hot tub
+          </label>
         </div>
       </div>
 
@@ -260,8 +296,11 @@ export default function AddPlacePage() {
         />
       </div>
 
-      <button type="submit" className="form-submit-btn">
-        Create Listing
+      {error && <p className="form-error">{error}</p>}
+      {success && <p className="form-success">{success}</p>}
+
+      <button type="submit" className="form-submit-btn" disabled={submitting}>
+        {submitting ? "Creating listing..." : "Create a listing"}
       </button>
     </form>
   );
