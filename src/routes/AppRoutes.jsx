@@ -10,7 +10,7 @@ import UserPlacesPage from "../pages/UserPlacesPage";
 import EditPlacePage from "../pages/EditPlacePage";
 import PlaceDetailsPage from "../pages/PlaceDetailsPage";
 import BookingPage from "../pages/BookingsPage";
-
+import BookingDetailPage from "../pages/BookingDetailPage";
 export default function AppRoutes() {
   return (
     <Routes>
@@ -51,14 +51,22 @@ export default function AppRoutes() {
           }
         />
         <Route path="places/:id" element={<PlaceDetailsPage />} />
-      <Route
-        path="/user/bookings"
-        element={
-          <ProtectedRoute>
-            <BookingPage />
-          </ProtectedRoute>
-        }
-      />
+        <Route
+          path="/user/bookings"
+          element={
+            <ProtectedRoute>
+              <BookingPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/booking/:id"
+          element={
+            <ProtectedRoute>
+              <BookingDetailPage />
+            </ProtectedRoute>
+          }
+        />
       </Route>
     </Routes>
   );

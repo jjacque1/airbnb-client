@@ -1,6 +1,7 @@
 import api from "../api/api";
 import { useState, useEffect } from "react";
 import Loading from "../components/Loading";
+import { Link } from "react-router-dom";
 
 export default function BookingPage() {
   const [bookings, setBookings] = useState([]);
@@ -36,7 +37,12 @@ export default function BookingPage() {
       ) : (
         <div className="bookings-list">
           {bookings.map((booking) => (
-            <div key={booking._id} className="booking-card">
+            <Link
+              to={`/booking/${booking._id}`}
+              key={booking._id}
+              className="booking-card"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
               <img src={booking.place.photos[0]} alt={booking.place.title} />
 
               <div className="booking-card-body">
@@ -62,7 +68,7 @@ export default function BookingPage() {
                   {booking.status}
                 </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}
