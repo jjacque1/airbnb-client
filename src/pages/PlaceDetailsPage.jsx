@@ -17,6 +17,7 @@ export default function PlaceDetailsPage() {
   const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [bookedRanges, setBookedRanges] = useState([]);
 
   let numberOfNights = 0;
 
@@ -43,6 +44,23 @@ export default function PlaceDetailsPage() {
 
     if (numberOfNights <= 0) {
       setError("Check-out date must be after check-in date.");
+      return;
+    }
+
+    const selectedCheckIn = new Date(checkIn);
+    const selectedCheckOut = new Date(checkOut);
+
+    const isUnavailable = bookedRanges.some((range) => {
+      const bookedCheckIn = new Date(range.checkIn);
+      const bookedCheckOut = new Date(range.checkOut);
+
+      return (
+        bookedCheckIn < selectedCheckOut && bookedCheckOut > selectedCheckIn
+      );
+    });
+
+    if (isUnavailable) {
+      setError("Selected dates are not available.");
       return;
     }
 
@@ -79,8 +97,11 @@ export default function PlaceDetailsPage() {
   useEffect(() => {
     async function fetchPlace() {
       try {
-        const response = await api.get(`/places/${id}`);
-        setPlace(response.data.place);
+        const placeRes = await api.get(`/places/${id}`);
+        const bookingsRes = await api.get(`/bookings/place/${id}`);
+
+        setPlace(placeRes.data.place);
+        setBookedRanges(bookingsRes.data);
       } catch (error) {
         console.error(error);
         setPlace(null);
@@ -93,7 +114,7 @@ export default function PlaceDetailsPage() {
   }, [id]);
 
   if (loading) {
-    return <Loading/>
+    return <Loading />;
   }
 
   if (!place) {
@@ -136,10 +157,6 @@ export default function PlaceDetailsPage() {
         </div>
 
         <form className="booking-form-card" onSubmit={handleBooking}>
-          <h3>
-            From ${place.price} <span> per night</span>
-          </h3>
-
           <div>
             <label htmlFor="check-in">
               CHECK-IN

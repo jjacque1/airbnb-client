@@ -318,6 +318,11 @@ textarea {
   font-weight: 600;
   margin-top: auto;
 }
+.place-card-price-span {
+  font-size: smaller;
+  color: #666;
+}
+
 
 /* User listing action buttons */
 .place-card-actions {
