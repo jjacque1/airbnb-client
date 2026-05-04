@@ -6,7 +6,37 @@ import Loading from "../components/Loading";
 export default function BookingDetailPage() {
   const [booking, setBooking] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const { id } = useParams();
+
+  async function handleCancelBooking() {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to cancel this booking?",
+    );
+
+    if (!isConfirmed) return;
+
+    setError("");
+    setSuccess("");
+    setSubmitting(true);
+
+    try {
+      await api.patch(`/bookings/${id}/cancel`);
+
+      setBooking((prevBooking) => ({ ...prevBooking, status: "cancelled" }));
+
+      setSuccess("Booking cancelled successfully.");
+    } catch (error) {
+      setError(
+        error.response?.data?.message ||
+          "Failed to cancel booking. Please try again.",
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   useEffect(() => {
     async function fetchBooking() {
@@ -34,50 +64,71 @@ export default function BookingDetailPage() {
   }
 
   return (
-  <div className="booking-detail-page">
-    <h1>Booking Details</h1>
-
     <div className="booking-detail-card">
-      <img
-        src={booking.place.photos[0]}
-        alt={booking.place.title}
-        className="booking-detail-image"
-      />
+      <div className="booking-detail-image-wrapper">
+        <img
+          src={booking.place.photos[0]}
+          alt={booking.place.title}
+          className="booking-detail-image"
+        />
+      </div>
 
       <div className="booking-detail-body">
-        <h2>{booking.place.title}</h2>
-        <p>{booking.place.address}</p>
+        <div className="booking-detail-header">
+          <h2>{booking.place.title}</h2>
+          <span
+            className={`booking-card-status ${
+              booking.status === "cancelled" ? "cancelled" : ""
+            }`}
+          >
+            {booking.status}
+          </span>
+        </div>
 
-        <p>
-          Check-in:{" "}
-          {new Date(booking.checkIn).toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-          })}
-        </p>
+        <p className="booking-detail-address">{booking.place.address}</p>
 
-        <p>
-          Check-out:{" "}
-          {new Date(booking.checkOut).toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-          })}
-        </p>
+        <div className="booking-detail-info-grid">
+          <p>
+            <strong>Check-in:</strong>{" "}
+            {new Date(booking.checkIn).toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            })}
+          </p>
 
-        <p>Guests: {booking.numberOfGuests}</p>
-        <p>Total price: ${booking.price}</p>
+          <p>
+            <strong>Check-out:</strong>{" "}
+            {new Date(booking.checkOut).toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            })}
+          </p>
 
-        <span
-          className={`booking-card-status ${
-            booking.status === "cancelled" ? "cancelled" : ""
-          }`}
-        >
-          {booking.status}
-        </span>
+          <p>
+            <strong>Guests:</strong> {booking.numberOfGuests}
+          </p>
+
+          <p>
+            <strong>Total:</strong> ${booking.price}
+          </p>
+        </div>
+
+        {error && <p className="form-error">{error}</p>}
+        {success && <p className="form-success">{success}</p>}
+
+        {booking.status === "active" && (
+          <button
+            type="button"
+            className="booking-cancel-btn"
+            onClick={handleCancelBooking}
+            disabled={submitting}
+          >
+            {submitting ? "Cancelling..." : "Cancel Booking"}
+          </button>
+        )}
       </div>
     </div>
-  </div>
-);
+  );
 }

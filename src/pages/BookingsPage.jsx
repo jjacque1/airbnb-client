@@ -30,43 +30,44 @@ export default function BookingPage() {
 
   return (
     <div className="bookings-page">
-      <h1 className="bookings-title">All Bookings</h1>
+      <h1 className="bookings-title">My Bookings</h1>
 
       {bookings.length === 0 ? (
         <p>No Bookings yet</p>
       ) : (
-        <div className="bookings-list">
+        <div className="user-places-list">
           {bookings.map((booking) => (
             <Link
               to={`/booking/${booking._id}`}
               key={booking._id}
-              className="booking-card"
               style={{ textDecoration: "none", color: "inherit" }}
             >
-              <img src={booking.place.photos[0]} alt={booking.place.title} />
+              <div className="place-card">
+                <img src={booking.place.photos[0]} alt={booking.place.title} />
 
-              <div className="booking-card-body">
-                <h3 className="booking-card-title">{booking.place.title}</h3>
-                <p className="booking-card-address">{booking.place.address}</p>
+                <div className="place-card-body">
+                  <h3 className="place-card-title">{booking.place.title}</h3>
+                  <p className="place-card-address">{booking.place.address}</p>
 
-                <p className="booking-card-info">
-                  {new Date(booking.checkIn).toLocaleDateString()} -{" "}
-                  {new Date(booking.checkOut).toLocaleDateString()}
-                </p>
+                  <p className="booking-card-info">
+                    {new Date(booking.checkIn).toLocaleDateString()} -{" "}
+                    {new Date(booking.checkOut).toLocaleDateString()}
+                  </p>
 
-                <p className="booking-card-info">
-                  Guests: {booking.numberOfGuests}
-                </p>
+                  <p className="booking-card-info">
+                    Guests: {booking.numberOfGuests}
+                  </p>
 
-                <p className="booking-card-info">Total: ${booking.price}</p>
+                  <p className="place-card-price">Total: ${booking.price}</p>
 
-                <span
-                  className={`booking-card-status ${
-                    booking.status === "cancelled" ? "cancelled" : ""
-                  }`}
-                >
-                  {booking.status}
-                </span>
+                  <span
+                    className={`booking-card-status ${
+                      booking.status === "cancelled" ? "cancelled" : ""
+                    }`}
+                  >
+                    {booking.status}
+                  </span>
+                </div>
               </div>
             </Link>
           ))}

@@ -29,7 +29,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <h1>All Listings</h1>
+      <h1>Destinations and Stays</h1>
 
       {places.length === 0 ? (
         <p>No listings available yet</p>

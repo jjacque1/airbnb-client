@@ -56,7 +56,7 @@ export default function UserPlacesPage() {
 
   return (
     <div className="user-places-page">
-      <h1 className="user-places-title">User Listings</h1>
+      <h1 className="user-places-title">My Listings</h1>
 
       <div className="user-places-list">
         {places.map((place) => (

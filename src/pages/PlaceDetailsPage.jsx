@@ -135,7 +135,7 @@ export default function PlaceDetailsPage() {
           )}
         </div>
 
-        <form className="booking-card" onSubmit={handleBooking}>
+        <form className="booking-form-card" onSubmit={handleBooking}>
           <h3>
             From ${place.price} <span> per night</span>
           </h3>
