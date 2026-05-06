@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import api from "../api/api";
 import { useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/style.css";
 
 export default function PlaceDetailsPage() {
   const { id } = useParams();
@@ -18,6 +20,21 @@ export default function PlaceDetailsPage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [bookedRanges, setBookedRanges] = useState([]);
+  const [selectedRange, setSelectedRange] = useState();
+
+  useEffect(() => {
+    if (selectedRange?.from) {
+      setCheckIn(selectedRange.from.toISOString().split("T")[0]);
+    } else {
+      setCheckIn("");
+    }
+
+    if (selectedRange?.to) {
+      setCheckOut(selectedRange.to.toISOString().split("T")[0]);
+    } else {
+      setCheckOut("");
+    }
+  }, [selectedRange]);
 
   let numberOfNights = 0;
 
@@ -26,10 +43,22 @@ export default function PlaceDetailsPage() {
     const checkOutDate = new Date(checkOut);
     const timeDifference = checkOutDate - checkInDate;
 
-    numberOfNights = timeDifference / (1000 * 60 * 60 * 24);
+    numberOfNights = Math.round(timeDifference / (1000 * 60 * 60 * 24));
   }
 
   const totalPrice = numberOfNights * place?.price;
+
+  const disabledBookedRanges = bookedRanges.map((range) => {
+    const bookedCheckIn = new Date(range.checkIn)
+    const bookedCheckOut = new Date(range.checkOut)
+
+    bookedCheckOut.setDate(bookedCheckOut.getDate() - 1)
+
+    return{
+      from: bookedCheckIn,
+      to: bookedCheckOut
+    }
+  })
 
   async function handleBooking(event) {
     event.preventDefault();
@@ -158,57 +187,50 @@ export default function PlaceDetailsPage() {
 
         <form className="booking-form-card" onSubmit={handleBooking}>
           <div>
-            <label htmlFor="check-in">
-              CHECK-IN
-              <input
-                type="date"
-                id="check-in"
-                value={checkIn}
-                onChange={(event) => setCheckIn(event.target.value)}
-              />
-            </label>
+            <h1>Make a Reservation</h1>
+            <div className="booking-calendar">
+              <p>CHECK-IN / CHECK-OUT</p>
 
-            <label htmlFor="check-out">
-              CHECK-OUT
-              <input
-                type="date"
-                id="check-out"
-                value={checkOut}
-                onChange={(event) => setCheckOut(event.target.value)}
+              <DayPicker
+                mode="range"
+                selected={selectedRange}
+                onSelect={setSelectedRange}
+                disabled={disabledBookedRanges}
               />
-            </label>
+            </div>
+            <div>
+              <label htmlFor="guests">
+                GUESTS
+                <input
+                  type="number"
+                  id="guests"
+                  min={1}
+                  placeholder="1 guest"
+                  value={numberOfGuests}
+                  onChange={(event) => setNumberOfGuests(event.target.value)}
+                />
+              </label>
 
-            <label htmlFor="guests">
-              GUESTS
-              <input
-                type="number"
-                id="guests"
-                min={1}
-                placeholder="1 guest"
-                value={numberOfGuests}
-                onChange={(event) => setNumberOfGuests(event.target.value)}
-              />
-            </label>
+              <label htmlFor="name">
+                NAME
+                <input
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
+                />
+              </label>
 
-            <label htmlFor="name">
-              NAME
-              <input
-                type="text"
-                id="name"
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-              />
-            </label>
-
-            <label htmlFor="phone">
-              PHONE
-              <input
-                type="tel"
-                id="phone"
-                value={phone}
-                onChange={(event) => setPhone(event.target.value)}
-              />
-            </label>
+              <label htmlFor="phone">
+                PHONE
+                <input
+                  type="tel"
+                  id="phone"
+                  value={phone}
+                  onChange={(event) => setPhone(event.target.value)}
+                />
+              </label>
+            </div>
           </div>
 
           {numberOfNights > 0 && (
