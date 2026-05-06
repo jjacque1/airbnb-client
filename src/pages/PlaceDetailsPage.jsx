@@ -49,16 +49,16 @@ export default function PlaceDetailsPage() {
   const totalPrice = numberOfNights * place?.price;
 
   const disabledBookedRanges = bookedRanges.map((range) => {
-    const bookedCheckIn = new Date(range.checkIn)
-    const bookedCheckOut = new Date(range.checkOut)
+    const bookedCheckIn = new Date(range.checkIn);
+    const bookedCheckOut = new Date(range.checkOut);
 
-    bookedCheckOut.setDate(bookedCheckOut.getDate() - 1)
+    bookedCheckOut.setDate(bookedCheckOut.getDate() - 1);
 
-    return{
+    return {
       from: bookedCheckIn,
-      to: bookedCheckOut
-    }
-  })
+      to: bookedCheckOut,
+    };
+  });
 
   async function handleBooking(event) {
     event.preventDefault();
@@ -187,49 +187,54 @@ export default function PlaceDetailsPage() {
 
         <form className="booking-form-card" onSubmit={handleBooking}>
           <div>
-            <h1>Make a Reservation</h1>
-            <div className="booking-calendar">
-              <p>CHECK-IN / CHECK-OUT</p>
+            <h1 className="booking-reserve-h1">Make a Reservation</h1>
+            <div className="booking-reserve-wrapper">
+              <div className="booking-calendar">
+                <p>CHECK-IN / CHECK-OUT</p>
 
-              <DayPicker
-                mode="range"
-                selected={selectedRange}
-                onSelect={setSelectedRange}
-                disabled={disabledBookedRanges}
-              />
-            </div>
-            <div>
-              <label htmlFor="guests">
-                GUESTS
-                <input
-                  type="number"
-                  id="guests"
-                  min={1}
-                  placeholder="1 guest"
-                  value={numberOfGuests}
-                  onChange={(event) => setNumberOfGuests(event.target.value)}
+                <DayPicker
+                  mode="range"
+                  selected={selectedRange}
+                  onSelect={setSelectedRange}
+                  disabled={disabledBookedRanges}
                 />
-              </label>
+              </div>
+              <div>
+                <label htmlFor="guests">
+                  GUESTS
+                  <input
+                    type="number"
+                    id="guests"
+                    min={1}
+                    placeholder="1 guest"
+                    value={numberOfGuests}
+                    onChange={(event) => setNumberOfGuests(event.target.value)}
+                  />
+                </label>
 
-              <label htmlFor="name">
-                NAME
-                <input
-                  type="text"
-                  id="name"
-                  value={name}
-                  onChange={(event) => setName(event.target.value)}
-                />
-              </label>
+                <label htmlFor="name">
+                  NAME
+                  <input
+                    type="text"
+                    id="name"
+                    value={name}
+                    onChange={(event) => setName(event.target.value)}
+                  />
+                </label>
 
-              <label htmlFor="phone">
-                PHONE
-                <input
-                  type="tel"
-                  id="phone"
-                  value={phone}
-                  onChange={(event) => setPhone(event.target.value)}
-                />
-              </label>
+                <label htmlFor="phone">
+                  PHONE
+                  <input
+                    type="tel"
+                    id="phone"
+                    value={phone}
+                    onChange={(event) => setPhone(event.target.value)}
+                  />
+                </label>
+                <button type="submit">Reserve</button>
+                {error && <p className="form-error">{error}</p>}
+                {success && <p className="form-success">{success}</p>}
+              </div>
             </div>
           </div>
 
@@ -238,11 +243,6 @@ export default function PlaceDetailsPage() {
               ${place.price} x {numberOfNights} nights = ${totalPrice}
             </p>
           )}
-
-          {error && <p className="form-error">{error}</p>}
-          {success && <p className="form-success">{success}</p>}
-
-          <button type="submit">Reserve</button>
         </form>
       </div>
     </div>
