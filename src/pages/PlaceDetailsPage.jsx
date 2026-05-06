@@ -190,7 +190,7 @@ export default function PlaceDetailsPage() {
             <h1 className="booking-reserve-h1">Make a Reservation</h1>
             <div className="booking-reserve-wrapper">
               <div className="booking-calendar">
-                <p>CHECK-IN / CHECK-OUT</p>
+                {/* <p>CHECK-IN / CHECK-OUT</p> */}
 
                 <DayPicker
                   mode="range"
@@ -199,7 +199,7 @@ export default function PlaceDetailsPage() {
                   disabled={disabledBookedRanges}
                 />
               </div>
-              <div>
+              <div className="booking-reserve-label-wrapper">
                 <label htmlFor="guests">
                   GUESTS
                   <input

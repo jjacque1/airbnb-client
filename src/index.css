@@ -20,7 +20,6 @@ h1 {
   margin-bottom: 1.5rem;
 }
 
-
 /* Header */
 
 .app-header {
@@ -69,7 +68,9 @@ h1 {
   font-weight: 700;
   line-height: 1;
   cursor: pointer;
-  transition: background-color 300ms ease, color 300ms ease;
+  transition:
+    background-color 300ms ease,
+    color 300ms ease;
 }
 
 .main-nav a.active {
@@ -343,7 +344,6 @@ textarea {
   color: #666;
 }
 
-
 /* User listing action buttons */
 .place-card-actions {
   display: flex;
@@ -442,17 +442,14 @@ textarea {
   font-weight: 600;
 }
 
-.booking-reserve-wrapper {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-top: 1rem;
+.booking-reserve-label-wrapper {
+  padding: 1rem;
 }
 
 .booking-reserve-h1 {
-display: flex;
-justify-content: center;
-align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Booking status badge */
@@ -557,6 +554,101 @@ align-items: center;
   transform: none;
 }
 
+.booking-reserve-h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.booking-reserve-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+  padding-top: 1rem;
+}
+
+.booking-calendar {
+  overflow-x: auto;
+}
+
+.booking-calendar p {
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+/* React DayPicker safety */
+.booking-calendar .rdp {
+  max-width: 100%;
+}
+
+.booking-calendar table {
+  width: 100%;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .booking-reserve-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-form-card {
+    margin: 1rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .booking-form-card {
+    margin: 1rem 0;
+    padding: 1rem;
+  }
+
+  .booking-reserve-h1 {
+    font-size: 1.25rem;
+  }
+
+  .booking-reserve-wrapper {
+    gap: 16px;
+  }
+
+  .booking-calendar {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .booking-calendar .rdp {
+    font-size: 0.85rem;
+  }
+
+  .booking-calendar .rdp-months {
+    display: block;
+  }
+
+  .booking-calendar .rdp-month {
+    width: 100%;
+  }
+
+  .booking-calendar .rdp-table {
+    width: 100%;
+  }
+
+  .booking-calendar .rdp-cell,
+  .booking-calendar .rdp-head_cell {
+    padding: 0;
+  }
+
+  .booking-calendar .rdp-day {
+    width: 36px;
+    height: 36px;
+    font-size: 0.85rem;
+  }
+
+  .booking-price-summary {
+    font-size: 0.95rem;
+  }
+}
+
 /* Mobile */
 @media (max-width: 750px) {
   .booking-detail-card {
@@ -655,9 +747,6 @@ align-items: center;
   padding: 0;
   margin-top: 0.75rem;
 }
-
-
-
 
 /* Auth pages */
 .auth-page {
