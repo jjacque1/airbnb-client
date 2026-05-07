@@ -190,7 +190,6 @@ export default function PlaceDetailsPage() {
             <h1 className="booking-reserve-h1">Make a Reservation</h1>
             <div className="booking-reserve-wrapper">
               <div className="booking-calendar">
-                {/* <p>CHECK-IN / CHECK-OUT</p> */}
 
                 <DayPicker
                   mode="range"

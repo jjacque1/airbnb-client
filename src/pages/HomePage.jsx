@@ -6,12 +6,16 @@ import Loading from "../components/Loading";
 export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const [places, setPlaces] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     async function fetchAllPlaces() {
       try {
-        const response = await api.get("/places");
+        const response = await api.get(`/places?page=${currentPage}&limit=8`);
         setPlaces(response.data.places);
+        setCurrentPage(response.data.currentPage);
+        setTotalPages(response.data.totalPages);
       } catch (error) {
         console.error(error);
         setPlaces([]);
@@ -21,10 +25,16 @@ export default function HomePage() {
     }
 
     fetchAllPlaces();
-  }, []);
+  }, [currentPage]);
 
   if (loading) {
-    return <Loading/>
+    return <Loading />;
+  }
+
+  const pageNumbers = [];
+
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
   }
 
   return (
@@ -56,6 +66,17 @@ export default function HomePage() {
           ))}
         </div>
       )}
+      <div className="pagination-controls">
+        {pageNumbers.map((pageNumber) => (
+          <button
+            key={pageNumber}
+            type="button"
+            onClick={() => setCurrentPage(pageNumber)}
+          >
+            {pageNumber}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
