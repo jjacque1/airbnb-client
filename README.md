@@ -8,16 +8,16 @@ This is the frontend for my Airbnb Clone project, built with React and Vite. It 
 
 At this stage, the frontend includes:
 
-- React application initialized with Vite
-- Production-style folder structure with separation of concerns
-- React Router configuration with nested routing
-- Shared layout using Header, Footer, and Outlet
-- Navigation with active route styling using `NavLink`
-- Centralized Axios API client with credential support
-- Environment-based backend URL configuration using Vite `.env`
-- Successful frontend-to-backend API communication
-- Fully functional user registration flow
-- Fully functional user login flow with cookie-based authentication
+- Full authentication flows with protected routes
+- Public listing browsing
+- Listing creation, editing, and deletion
+- User listings dashboard
+- Booking creation and management
+- Booking availability validation
+- Disabled unavailable dates in reservation calendar
+- Booking details and cancellation flow
+- Responsive layouts for desktop, tablet, and mobile
+- Production-style reusable UI structure
 
 ---
 
@@ -28,6 +28,7 @@ At this stage, the frontend includes:
 - React Router DOM
 - Axios
 - CSS
+- React DayPicker
 
 ---
 
@@ -43,6 +44,7 @@ src
 │   ├── Header.jsx
 │   ├── Layout.jsx
 │   └── ProtectedRoute.jsx
+│   └── Loading.jsx
 ├── context
 │   └── AuthContext.jsx
 |   |__ AuthProvider.jsx
@@ -55,12 +57,14 @@ src
 │   ├── EditPlacePage.jsx
 │   ├── UserPlacesPage.jsx
 │   └── PlaceDetailsPage.jsx
+│   ├── BookingPage.jsx
+│   └── BookingDetailPage.jsx
 ├── routes
 │   └── AppRoutes.jsx
 ├── App.jsx
 └── main.jsx
-|__ App.css
-|__ index.css
+├── App.css
+└── index.css
 ```
 
 ---
@@ -89,6 +93,32 @@ src
 - withCredentials: true for secure cookie-based authentication
 
 ### Listings (Places) System
+
+### Booking System
+
+#### Create Booking
+
+- Reservation form on listing details page
+- Controlled booking form inputs
+- Dynamic total price calculation
+- Frontend booking validation before submission
+- Booking creation via POST /bookings
+
+#### Availability System
+
+- Fetch active booking ranges for a listing
+- Frontend overlap validation
+- Backend overlap enforcement
+- Disabled unavailable dates using React DayPicker
+- Prevents double bookings
+
+#### Booking Management
+
+- User bookings page
+- Individual booking details page
+- Booking cancellation flow
+- Dynamic status updates (active / cancelled)
+- Cancelled bookings reopen availability
 
 #### - Create Listing
 - Controlled form with dynamic state management
@@ -137,6 +167,11 @@ src
 - Responsive card layouts
 - Clean form structure and spacing
 - Reusable styling system
+- Responsive booking calendar UX
+- Disabled submit states during async operations
+- Success and error feedback messaging
+- Availability-aware reservation flow
+- Unified reusable card design system
 
 ### What I Learned
 
@@ -149,6 +184,12 @@ src
 - Handling async data fetching and loading states
 - Understanding event bubbling and stopPropagation
 - Designing user-friendly UI/UX patterns
+- Implementing frontend + backend availability systems
+- Date overlap validation logic
+- Responsive UI architecture
+- Calendar-based booking UX
+- Production-style form state management
+- Real-world async UX patterns
 
 ### API Relationship Example
 
@@ -180,11 +221,13 @@ npm run dev
 
 ### Next Steps
 
-- Booking system (create and manage reservations)
-- Availability and date conflict handling
-- Listing image gallery improvements
 - Search and filtering system
-- Pagination or infinite scroll
+- Pagination / infinite scroll
+- Image upload optimization
+- Image gallery / carousel
+- Wishlist system
+- Review system
+- Map integration
 - Deployment (Vercel + Render)
 
 ## Author
