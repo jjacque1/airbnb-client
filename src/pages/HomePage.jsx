@@ -14,6 +14,7 @@ export default function HomePage() {
       try {
         const response = await api.get(`/places?page=${currentPage}&limit=8`);
         setPlaces(response.data.places);
+        console.log(response.data);
         setCurrentPage(response.data.currentPage);
         setTotalPages(response.data.totalPages);
       } catch (error) {
