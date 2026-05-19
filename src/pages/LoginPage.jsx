@@ -20,7 +20,7 @@ export default function LoginPage() {
       });
 
       setUser(response.data.user)
-      navigate("/")
+      navigate("/profile")
 
       setEmail("");
       setPassword("");
