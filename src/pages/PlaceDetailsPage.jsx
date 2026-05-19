@@ -6,10 +6,13 @@ import Loading from "../components/Loading";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
 import BackButton from "../components/BackButton";
+import { AuthContext } from "../context/AuthContext";
+import { useContext } from "react";
 
 export default function PlaceDetailsPage() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
   const [loading, setLoading] = useState(true);
   const [place, setPlace] = useState(null);
@@ -66,6 +69,12 @@ export default function PlaceDetailsPage() {
 
     setError("");
     setSuccess("");
+
+     if (!user) {
+    setError("Please login to book this stay");
+    return;
+  }
+
 
     if (!checkIn || !checkOut || !numberOfGuests || !name || !phone) {
       setError("Please fill out all booking fields.");

@@ -22,6 +22,12 @@ export default function Header() {
           {!user ? (
             <>
               <NavLink
+                to="/"
+                className={({ isActive }) => (isActive ? "active" : "")}
+              >
+                Home
+              </NavLink>
+              <NavLink
                 to="/login"
                 className={({ isActive }) => (isActive ? "active" : "")}
               >
@@ -36,12 +42,19 @@ export default function Header() {
             </>
           ) : (
             <>
-              <NavLink to="/profile" className={({ isActive }) => (isActive ? "active" : "")}>
+              <NavLink
+                to="/"
+                className={({ isActive }) => (isActive ? "active" : "")}
+              >
+                Home
+              </NavLink>
+              <NavLink
+                to="/profile"
+                className={({ isActive }) => (isActive ? "active" : "")}
+              >
                 Profile
               </NavLink>
-              <button onClick={handleLogout} >
-                Logout
-              </button>
+              <button onClick={handleLogout}>Logout</button>
             </>
           )}
         </nav>

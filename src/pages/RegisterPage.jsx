@@ -5,6 +5,9 @@ import {
   useNavigate,
 } from "react-router-dom";
 
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+
 export default function RegisterPage() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -12,6 +15,7 @@ export default function RegisterPage() {
   const [error, setError] = useState();
   const [passwordHint, setPasswordHint] = useState("");
   const navigate = useNavigate();
+  const { setUser } = useContext(AuthContext);
 
   async function handleRegister(event) {
     event.preventDefault();
@@ -47,15 +51,15 @@ export default function RegisterPage() {
         password,
       });
 
-      console.log("Register success:", response.data);
+      setUser(response.data.user);
 
-      navigate("/login");
+      navigate("/profile");
 
       setFullName("");
       setEmail("");
       setPassword("");
     } catch (error) {
-      console.error(error.response?.data || error.message);
+      setError(error.response?.data?.message || "Registration failed");
     }
   }
 

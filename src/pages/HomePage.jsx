@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "../api/api";
 import Loading from "../components/Loading";
+import BackButton from "../components/BackButton";
 
 export default function HomePage() {
   const [loading, setLoading] = useState(true);
@@ -38,8 +39,10 @@ export default function HomePage() {
     pageNumbers.push(i);
   }
 
+
   return (
     <div>
+      
       <h1>Destinations and Stays</h1>
 
       {places.length === 0 ? (
