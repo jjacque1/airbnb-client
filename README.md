@@ -15,7 +15,7 @@ At this stage, the frontend includes:
 - Navigation with active route styling using `NavLink`
 - Centralized Axios API client with credential support
 - Environment-based backend URL configuration using Vite `.env`
-- Successful frontend-to-backend API communication
+- RESTful frontend-to-backend API integration
 - Fully functional user registration flow
 - Fully functional user login flow with cookie-based authentication
 - Full booking system with reservation management
@@ -252,6 +252,14 @@ npm run dev
 - Review and rating system
 - Map integration
 - Deployment (Vercel + Render)
+
+### Deployment Architecture
+
+- Frontend deployed on Vercel
+- Backend deployed on Render
+- MongoDB Atlas for database hosting
+- Environment variables used for secure configuration
+- Cross-origin cookie authentication configured with CORS
 
 ## Author
 
