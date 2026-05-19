@@ -13,7 +13,6 @@ export default function BookingPage() {
       try {
         const response = await api.get("/bookings");
         setBookings(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error(error);
         setBookings([]);

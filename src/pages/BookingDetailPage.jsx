@@ -44,7 +44,6 @@ export default function BookingDetailPage() {
       try {
         const response = await api.get(`/bookings/${id}`);
         setBooking(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error(error);
         setBooking(null);

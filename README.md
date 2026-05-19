@@ -8,16 +8,22 @@ This is the frontend for my Airbnb Clone project, built with React and Vite. It 
 
 At this stage, the frontend includes:
 
-- Full authentication flows with protected routes
-- Public listing browsing
-- Listing creation, editing, and deletion
-- User listings dashboard
-- Booking creation and management
-- Booking availability validation
-- Disabled unavailable dates in reservation calendar
-- Booking details and cancellation flow
-- Responsive layouts for desktop, tablet, and mobile
-- Production-style reusable UI structure
+- React application initialized with Vite
+- Production-style folder structure with separation of concerns
+- React Router configuration with nested routing
+- Shared layout using Header, Footer, and Outlet
+- Navigation with active route styling using `NavLink`
+- Centralized Axios API client with credential support
+- Environment-based backend URL configuration using Vite `.env`
+- Successful frontend-to-backend API communication
+- Fully functional user registration flow
+- Fully functional user login flow with cookie-based authentication
+- Full booking system with reservation management
+- Booking cancellation flow
+- Pagination system for listings
+- Auto-login after successful registration
+- Reusable back button navigation
+- Responsive booking and listing layouts
 
 ---
 
@@ -70,6 +76,24 @@ src
 ---
 
 ## Features Implemented
+
+### Booking System
+
+#### Create Booking
+
+- Authenticated users can reserve listings
+- Booking form with controlled inputs
+- Dynamic total price calculation
+- Validation for check-in/check-out dates
+- Prevents unauthenticated booking attempts
+
+#### Booking Management
+
+- Fetch authenticated user bookings
+- Booking detail page
+- Booking cancellation system
+- Status tracking (active/cancelled)
+- Responsive booking card layout
 
 ### Authentication System
 
@@ -221,12 +245,11 @@ npm run dev
 
 ### Next Steps
 
+- Full mobile responsiveness polish
 - Search and filtering system
-- Pagination / infinite scroll
-- Image upload optimization
-- Image gallery / carousel
-- Wishlist system
-- Review system
+- Image upload/cloud storage integration
+- Favorites/wishlist system
+- Review and rating system
 - Map integration
 - Deployment (Vercel + Render)
 

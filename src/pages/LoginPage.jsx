@@ -7,8 +7,9 @@ import { useNavigate } from "react-router-dom";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setUser } = useContext(AuthContext)
-  const navigate = useNavigate()
+  const [error, setError] = useState(null);
+  const { setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   async function handleLogin(event) {
     event.preventDefault();
@@ -19,18 +20,16 @@ export default function LoginPage() {
         password,
       });
 
-      setUser(response.data.user)
-      navigate("/profile")
+      setUser(response.data.user);
+      navigate("/profile");
 
       setEmail("");
       setPassword("");
 
-      console.log("Login successful: ", response.data);
     } catch (error) {
-      console.error(error.response?.data || error.message);
+      setError(error.response?.data?.message || "Login failed");
     }
   }
-
 
   return (
     <form onSubmit={handleLogin}>
@@ -61,6 +60,7 @@ export default function LoginPage() {
           }}
         />
       </div>
+      <p style={{ color: "red", paddingTop: "16px" }}> {error} </p>
       <button type="submit">Login</button>
     </form>
   );

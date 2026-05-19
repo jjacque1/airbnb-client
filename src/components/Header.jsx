@@ -22,12 +22,6 @@ export default function Header() {
           {!user ? (
             <>
               <NavLink
-                to="/"
-                className={({ isActive }) => (isActive ? "active" : "")}
-              >
-                Home
-              </NavLink>
-              <NavLink
                 to="/login"
                 className={({ isActive }) => (isActive ? "active" : "")}
               >
@@ -42,12 +36,6 @@ export default function Header() {
             </>
           ) : (
             <>
-              <NavLink
-                to="/"
-                className={({ isActive }) => (isActive ? "active" : "")}
-              >
-                Home
-              </NavLink>
               <NavLink
                 to="/profile"
                 className={({ isActive }) => (isActive ? "active" : "")}
