@@ -2,6 +2,7 @@ import api from "../api/api";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
+import BackButton from "../components/BackButton";
 
 export default function UserPlacesPage() {
   const [places, setPlaces] = useState([]);
@@ -47,50 +48,52 @@ export default function UserPlacesPage() {
   }
 
   if (loading) {
-    return <Loading/>
-  }
-
-  if (places.length === 0) {
-    return <p>No listings yet</p>;
+    return <Loading />;
   }
 
   return (
     <div className="user-places-page">
-      <h1 className="user-places-title">My Listings</h1>
-
-      <div className="user-places-list">
-        {places.map((place) => (
-          <div key={place._id} className="place-card">
-            <Link
-              to={`/places/${place._id}`}
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <img
-                src={place.photos[0]}
-                alt={place.title}
-                className="place-card-image"
-              />
-
-              <div className="place-card-body">
-                <h3 className="place-card-title">{place.title}</h3>
-                <p className="place-card-address">{place.address}</p>
-                <p className="place-card-price">${place.price}</p>
-              </div>
-            </Link>
-
-            <div className="place-card-actions">
-              <button onClick={() => handleEditPlace(place._id)}>Edit</button>
-
-              <button
-                onClick={() => handleDeletePlace(place._id)}
-                className="place-card-delete-btn"
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        ))}
+      <div className="backBtn">
+        <BackButton />
       </div>
+      <h1 className="user-places-title">My Listings</h1>
+      {places.length === 0 ? (
+        <p>No listings yet</p>
+      ) : (
+        <div className="user-places-list">
+          {places.map((place) => (
+            <div key={place._id} className="place-card">
+              <Link
+                to={`/places/${place._id}`}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <img
+                  src={place.photos[0]}
+                  alt={place.title}
+                  className="place-card-image"
+                />
+
+                <div className="place-card-body">
+                  <h3 className="place-card-title">{place.title}</h3>
+                  <p className="place-card-address">{place.address}</p>
+                  <p className="place-card-price">${place.price}</p>
+                </div>
+              </Link>
+
+              <div className="place-card-actions">
+                <button onClick={() => handleEditPlace(place._id)}>Edit</button>
+
+                <button
+                  onClick={() => handleDeletePlace(place._id)}
+                  className="place-card-delete-btn"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

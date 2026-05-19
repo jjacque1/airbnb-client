@@ -41,6 +41,7 @@ export default function LoginPage() {
         <label htmlFor="email">Email: </label>
         <input
           value={email}
+          placeholder="Enter email"
           type="email"
           id="email"
           onChange={(event) => {
@@ -52,6 +53,7 @@ export default function LoginPage() {
         <label htmlFor="password">Password: </label>
         <input
           value={password}
+          placeholder="Enter password"
           type="password"
           id="password"
           onChange={(event) => {

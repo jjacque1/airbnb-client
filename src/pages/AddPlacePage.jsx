@@ -1,6 +1,7 @@
 import { useState } from "react";
 import api from "../api/api";
 import { useNavigate } from "react-router-dom";
+import BackButton from "../components/BackButton";
 
 export default function AddPlacePage() {
   const [title, setTitle] = useState("");
@@ -113,8 +114,11 @@ export default function AddPlacePage() {
 
   return (
     <form onSubmit={handleSubmit} className="add-place-page">
+      <div className="backBtn">
+        <BackButton />
+      </div>
+      <div></div>
       <h1>Create a Listing</h1>
-
       {/* Photos */}
       <div className="add-place-form-group">
         <label htmlFor="photoLink">Photos</label>

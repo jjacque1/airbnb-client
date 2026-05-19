@@ -20,6 +20,14 @@ h1 {
   margin-bottom: 1.5rem;
 }
 
+.backBtn {
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+}
+
 /* Header */
 
 .app-header {
@@ -129,6 +137,14 @@ textarea {
 /* Shared page spacing */
 .page-section {
   margin-bottom: 24px;
+}
+
+/* Registration */
+
+.input-hint {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: #666;
 }
 
 /* AddPlacePage */

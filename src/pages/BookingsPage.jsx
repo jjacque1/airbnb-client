@@ -2,6 +2,7 @@ import api from "../api/api";
 import { useState, useEffect } from "react";
 import Loading from "../components/Loading";
 import { Link } from "react-router-dom";
+import BackButton from "../components/BackButton";
 
 export default function BookingPage() {
   const [bookings, setBookings] = useState([]);
@@ -30,6 +31,9 @@ export default function BookingPage() {
 
   return (
     <div className="bookings-page">
+      <div className="backBtn">
+        <BackButton />
+      </div>
       <h1 className="bookings-title">My Bookings</h1>
 
       {bookings.length === 0 ? (

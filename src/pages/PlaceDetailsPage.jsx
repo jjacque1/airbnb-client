@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
+import BackButton from "../components/BackButton";
 
 export default function PlaceDetailsPage() {
   const { id } = useParams();
@@ -156,6 +157,9 @@ export default function PlaceDetailsPage() {
 
   return (
     <div className="place-details-page">
+      <div className="backBtn">
+        <BackButton />
+      </div>
       <h1 className="place-details-title">{place.title}</h1>
       <p className="place-details-address">{place.address}</p>
 
@@ -190,7 +194,6 @@ export default function PlaceDetailsPage() {
             <h1 className="booking-reserve-h1">Make a Reservation</h1>
             <div className="booking-reserve-wrapper">
               <div className="booking-calendar">
-
                 <DayPicker
                   mode="range"
                   selected={selectedRange}

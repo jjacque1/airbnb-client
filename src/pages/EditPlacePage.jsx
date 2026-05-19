@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import api from "../api/api";
+import BackButton from "../components/BackButton";
 
 export default function EditPlacePage() {
   const { id } = useParams();
@@ -128,6 +129,9 @@ export default function EditPlacePage() {
 
   return (
     <form className="add-place-page" onSubmit={handleSubmit}>
+      <div className="backBtn">
+        <BackButton />
+      </div>
       <h1>Edit Listing</h1>
 
       {/* Photos */}

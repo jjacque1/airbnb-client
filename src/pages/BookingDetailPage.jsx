@@ -2,6 +2,7 @@ import api from "../api/api";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../components/Loading";
+import BackButton from "../components/BackButton";
 
 export default function BookingDetailPage() {
   const [booking, setBooking] = useState(null);
@@ -64,70 +65,77 @@ export default function BookingDetailPage() {
   }
 
   return (
-    <div className="booking-detail-card">
-      <div className="booking-detail-image-wrapper">
-        <img
-          src={booking.place.photos[0]}
-          alt={booking.place.title}
-          className="booking-detail-image"
-        />
+    <div>
+      <div className="backBtn">
+        <BackButton />
       </div>
 
-      <div className="booking-detail-body">
-        <div className="booking-detail-header">
-          <h2>{booking.place.title}</h2>
-          <span
-            className={`booking-card-status ${
-              booking.status === "cancelled" ? "cancelled" : ""
-            }`}
-          >
-            {booking.status}
-          </span>
+      <div className="booking-detail-card">
+        <div className="booking-detail-image-wrapper">
+          <img
+            src={booking.place.photos[0]}
+            alt={booking.place.title}
+            className="booking-detail-image"
+          />
         </div>
 
-        <p className="booking-detail-address">{booking.place.address}</p>
+        <div className="booking-detail-body">
+          <div className="booking-detail-header">
+            <h2>{booking.place.title}</h2>
 
-        <div className="booking-detail-info-grid">
-          <p>
-            <strong>Check-in:</strong>{" "}
-            {new Date(booking.checkIn).toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-            })}
-          </p>
+            <span
+              className={`booking-card-status ${
+                booking.status === "cancelled" ? "cancelled" : ""
+              }`}
+            >
+              {booking.status}
+            </span>
+          </div>
 
-          <p>
-            <strong>Check-out:</strong>{" "}
-            {new Date(booking.checkOut).toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-            })}
-          </p>
+          <p className="booking-detail-address">{booking.place.address}</p>
 
-          <p>
-            <strong>Guests:</strong> {booking.numberOfGuests}
-          </p>
+          <div className="booking-detail-info-grid">
+            <p>
+              <strong>Check-in:</strong>{" "}
+              {new Date(booking.checkIn).toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </p>
 
-          <p>
-            <strong>Total:</strong> ${booking.price}
-          </p>
+            <p>
+              <strong>Check-out:</strong>{" "}
+              {new Date(booking.checkOut).toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </p>
+
+            <p>
+              <strong>Guests:</strong> {booking.numberOfGuests}
+            </p>
+
+            <p>
+              <strong>Total:</strong> ${booking.price}
+            </p>
+          </div>
+
+          {error && <p className="form-error">{error}</p>}
+          {success && <p className="form-success">{success}</p>}
+
+          {booking.status === "active" && (
+            <button
+              type="button"
+              className="booking-cancel-btn"
+              onClick={handleCancelBooking}
+              disabled={submitting}
+            >
+              {submitting ? "Cancelling..." : "Cancel Booking"}
+            </button>
+          )}
         </div>
-
-        {error && <p className="form-error">{error}</p>}
-        {success && <p className="form-success">{success}</p>}
-
-        {booking.status === "active" && (
-          <button
-            type="button"
-            className="booking-cancel-btn"
-            onClick={handleCancelBooking}
-            disabled={submitting}
-          >
-            {submitting ? "Cancelling..." : "Cancel Booking"}
-          </button>
-        )}
       </div>
     </div>
   );
