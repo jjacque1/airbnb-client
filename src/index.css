@@ -28,6 +28,17 @@ h1 {
   border-radius: 8px;
 }
 
+.password-input-wrapper {
+  position: relative;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 /* Header */
 
 .app-header {

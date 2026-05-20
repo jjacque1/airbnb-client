@@ -8,6 +8,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
   const { setUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -25,7 +26,6 @@ export default function LoginPage() {
 
       setEmail("");
       setPassword("");
-
     } catch (error) {
       setError(error.response?.data?.message || "Login failed");
     }
@@ -48,17 +48,26 @@ export default function LoginPage() {
           }}
         />
       </div>
-      <div>
+      <div className="password-input-wrapper">
         <label htmlFor="password">Password: </label>
+
         <input
           value={password}
           placeholder="Enter password"
-          type="password"
+          type={showPassword ? "text" : "password"}
           id="password"
           onChange={(event) => {
             setPassword(event.target.value);
           }}
         />
+
+        <button
+          type="button"
+          className="password-toggle-btn"
+          onClick={() => setShowPassword(!showPassword)}
+        >
+          {showPassword ? "🙈" : "👁"}
+        </button>
       </div>
       <p style={{ color: "red", paddingTop: "16px" }}> {error} </p>
       <button type="submit">Login</button>
