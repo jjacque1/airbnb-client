@@ -169,6 +169,9 @@ export default function PlaceDetailsPage() {
       <div className="backBtn">
         <BackButton />
       </div>
+      <div>
+        <h1 className="place-details-title">{place.title}</h1>
+      </div>
       <p className="place-details-address">{place.address}</p>
 
       <div className="place-details-card">
