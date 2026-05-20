@@ -166,11 +166,13 @@ export default function PlaceDetailsPage() {
 
   return (
     <div className="place-details-page">
-      <div className="back-and-h1-wrapper">
+      <div className="backbtn-and-h1-wrapper">
+        <div>
+          <h1 className="place-details-title">{place.title}</h1>
+        </div>
         <div className="backBtn">
           <BackButton />
         </div>
-        <h1 className="place-details-title">{place.title}</h1>
       </div>
       <p className="place-details-address">{place.address}</p>
 
