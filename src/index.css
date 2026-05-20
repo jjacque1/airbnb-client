@@ -30,15 +30,26 @@ h1 {
 
 .password-input-wrapper {
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .password-toggle-btn {
   position: absolute;
   right: 12px;
-  top: 50%;
+  top: 70%;
   transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 18px;
 }
 
+.password-toggle-btn:hover {
+  background: none;
+  transform: translateY(-50%);
+}
 /* Header */
 
 .app-header {
