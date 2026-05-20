@@ -14,6 +14,7 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
   const [passwordHint, setPasswordHint] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
 
@@ -90,23 +91,28 @@ export default function RegisterPage() {
           onChange={(event) => setEmail(event.target.value)}
         />
       </div>
-      <div>
+      <div className="password-input-wrapper">
         <label htmlFor="password">Password: </label>
+
         <input
-          id="password"
-          placeholder="Enter password"
-          type="password"
           value={password}
+          placeholder="Enter password"
+          type={showPassword ? "text" : "password"}
+          id="password"
           onChange={(event) => {
             setPassword(event.target.value);
           }}
-          onFocus={() =>
-            setPasswordHint("Password must be at least 12 characters.")
-          }
         />
+
+        <button
+          type="button"
+          className="password-toggle-btn"
+          onClick={() => setShowPassword(!showPassword)}
+        >
+          {showPassword ? "🙈" : "👁"}
+        </button>
         <p className="input-hint"> {passwordHint} </p>
       </div>
-      <div></div>
       <p style={{ color: "red", paddingTop: "16px" }}> {error} </p>
       <button type="submit">Sign up</button>
     </form>
