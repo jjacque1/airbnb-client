@@ -18,9 +18,13 @@ This is the frontend for my Airbnb Clone project, built with React and Vite. It 
 
 ![Listing Details](./screenshots/my-listings.png)
 
+### Edit Listings Page
+
+![Listing Details](./screenshots/edit_listing.png)
+
 ### Booking Page
 
-![Booking Page](./screenshots/booking-page.png)
+![Booking Page](./screenshots/booking_page.png)
 
 ### Booking Detail Page
 
