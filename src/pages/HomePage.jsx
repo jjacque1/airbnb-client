@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import api from "../api/api";
 import Loading from "../components/Loading";
 import BackButton from "../components/BackButton";
+import defaultPlaceImage from "../assets/default-place.png";
 
 export default function HomePage() {
   const [loading, setLoading] = useState(true);
@@ -39,10 +40,8 @@ export default function HomePage() {
     pageNumbers.push(i);
   }
 
-
   return (
     <div>
-      
       <h1>Destinations and Stays</h1>
 
       {places.length === 0 ? (
@@ -56,7 +55,10 @@ export default function HomePage() {
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <div className="place-card">
-                <img src={place.photos[0]} alt={place.title} />
+                <img
+                  src={place.photos?.[0] || defaultPlaceImage}
+                  alt={place.title}
+                />
                 <div className="place-card-body">
                   <h3 className="place-card-title">{place.title}</h3>
                   <p className="place-card-address">{place.address}</p>

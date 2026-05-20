@@ -85,7 +85,7 @@ export default function EditPlacePage() {
       };
 
       await api.patch(`/places/${id}`, updatedPlace);
-      setSuccess("Listing edited successfully");
+      setSuccess("Listing edited successfully, redirecting...");
 
       setTimeout(() => {
         navigate("/user/places");

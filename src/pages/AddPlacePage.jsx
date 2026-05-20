@@ -85,7 +85,7 @@ export default function AddPlacePage() {
 
       await api.post("/places", newPlace);
 
-      setSuccess("Listing created successfully");
+      setSuccess("Listing created successfully, redirecting...");
 
       // reset form
       setTitle("");

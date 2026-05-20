@@ -8,6 +8,7 @@ import "react-day-picker/style.css";
 import BackButton from "../components/BackButton";
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
+import defaultPlaceImage from "../assets/default-place.png";
 
 export default function PlaceDetailsPage() {
   const { id } = useParams();
@@ -115,7 +116,7 @@ export default function PlaceDetailsPage() {
 
     try {
       await api.post("/bookings", bookingData);
-      setSuccess("Booking created successfully!");
+      setSuccess("Booking created successfully! redirecting...");
       setCheckIn("");
       setCheckOut("");
       setNumberOfGuests(1);
@@ -175,7 +176,7 @@ export default function PlaceDetailsPage() {
       <div className="place-details-card">
         <div className="place-img-wrapper">
           <div className="place-detail-main-photo">
-            <img src={place.photos[0]} alt={place.title} />
+            <img src={place.photos[0] || defaultPlaceImage} alt={place.title} />
           </div>
         </div>
 

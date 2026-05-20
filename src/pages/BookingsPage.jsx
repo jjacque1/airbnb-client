@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Loading from "../components/Loading";
 import { Link } from "react-router-dom";
 import BackButton from "../components/BackButton";
+import defaultPlaceImage from "../assets/default-place.png";
 
 export default function BookingPage() {
   const [bookings, setBookings] = useState([]);
@@ -46,7 +47,7 @@ export default function BookingPage() {
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <div className="place-card">
-                <img src={booking.place.photos[0]} alt={booking.place.title} />
+                <img src={booking.place.photos?.[0] || defaultPlaceImage}  defaultPlaceImage alt={booking.place.title} />
 
                 <div className="place-card-body">
                   <h3 className="place-card-title">{booking.place.title}</h3>

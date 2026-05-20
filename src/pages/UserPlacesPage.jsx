@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
 import BackButton from "../components/BackButton";
+import defaultPlaceImage from "../assets/default-place.png";
 
 export default function UserPlacesPage() {
   const [places, setPlaces] = useState([]);
@@ -68,7 +69,7 @@ export default function UserPlacesPage() {
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 <img
-                  src={place.photos[0]}
+                  src={place.photos[0] || defaultPlaceImage}
                   alt={place.title}
                   className="place-card-image"
                 />

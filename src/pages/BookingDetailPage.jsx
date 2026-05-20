@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../components/Loading";
 import BackButton from "../components/BackButton";
+import defaultPlaceImage from "../assets/default-place.png";
 
 export default function BookingDetailPage() {
   const [booking, setBooking] = useState(null);
@@ -72,7 +73,7 @@ export default function BookingDetailPage() {
       <div className="booking-detail-card">
         <div className="booking-detail-image-wrapper">
           <img
-            src={booking.place.photos[0]}
+            src={booking.place.photos[0] || defaultPlaceImage}
             alt={booking.place.title}
             className="booking-detail-image"
           />
