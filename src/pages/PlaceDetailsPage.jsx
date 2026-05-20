@@ -71,11 +71,10 @@ export default function PlaceDetailsPage() {
     setError("");
     setSuccess("");
 
-     if (!user) {
-    setError("Please login to book this stay");
-    return;
-  }
-
+    if (!user) {
+      setError("Please login to book this stay");
+      return;
+    }
 
     if (!checkIn || !checkOut || !numberOfGuests || !name || !phone) {
       setError("Please fill out all booking fields.");
@@ -167,10 +166,12 @@ export default function PlaceDetailsPage() {
 
   return (
     <div className="place-details-page">
-      <div className="backBtn">
-        <BackButton />
+      <div className="back-and-h1-wrapper">
+        <div className="backBtn">
+          <BackButton />
+        </div>
+        <h1 className="place-details-title">{place.title}</h1>
       </div>
-      <h1 className="place-details-title">{place.title}</h1>
       <p className="place-details-address">{place.address}</p>
 
       <div className="place-details-card">

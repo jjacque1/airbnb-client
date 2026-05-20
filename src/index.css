@@ -32,6 +32,13 @@ label {
   border-radius: 8px;
 }
 
+.back-and-h1-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 .password-input-wrapper {
   position: relative;
   display: flex;
