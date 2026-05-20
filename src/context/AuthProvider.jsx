@@ -12,7 +12,9 @@ export function AuthProvider({ children }) {
         const response = await api.get("/auth/profile");
         setUser(response.data.user);
       } catch (error) {
-        console.error(error);
+        if (error.response?.status !== 401) {
+          console.error(error);
+        }
         setUser(null);
       } finally {
         setLoading(false);
@@ -26,12 +28,13 @@ export function AuthProvider({ children }) {
     try {
       await api.post("/auth/logout");
     } catch (error) {
-      console.error(error);
+      if (error.response?.status !== 401) {
+        console.error(error);
+      }
     } finally {
       setUser(null);
     }
   }
-
 
   return (
     <AuthContext.Provider value={{ user, setUser, loading, logout }}>
