@@ -4,6 +4,30 @@ This is the frontend for my Airbnb Clone project, built with React and Vite. It 
 
 ---
 
+## Screenshots
+
+### Homepage
+
+![Homepage](./screenshots/homepage.png)
+
+### Listing From Page
+
+![Listing Details](./screenshots/listing-form.png)
+
+### My Listings Page
+
+![Listing Details](./screenshots/my-listings.png)
+
+### Booking Page
+
+![Booking Page](./screenshots/booking-page.png)
+
+### Booking Detail Page
+
+![Booking Page](./screenshots/booking-details.png)
+
+---
+
 ## Current Project Status
 
 At this stage, the frontend includes:
@@ -145,11 +169,13 @@ src
 - Cancelled bookings reopen availability
 
 #### - Create Listing
+
 - Controlled form with dynamic state management
 - Photo URL input with add/remove functionality
 - Amenities selection using checkbox system
 - Form validation before submission
 - POST request to /places
+
 ### Edit Listing
 
 - Pre-filled form using fetched data
@@ -175,12 +201,12 @@ src
 - Dynamic route: /places/:id
 - Fetch single listing by ID
 - Displays:
-    - Title
-    - Address
-    - Main image
-    - Description
-    - Price
-    - Amenities
+  - Title
+  - Address
+  - Main image
+  - Description
+  - Price
+  - Amenities
 - Handles loading and error states
 
 ### UI/UX Enhancements
@@ -225,17 +251,23 @@ src
 ### How to Run the Frontend
 
 1. Install dependencies:
+
 ```
 npm install
 ```
+
 2. Create a .env file in the root:
+
 ```
 VITE_API_URL=http://localhost:5000
 ```
+
 3. Start development server:
+
 ```
 npm run dev
 ```
+
 ### Important Notes
 
 - .env is excluded from version control
