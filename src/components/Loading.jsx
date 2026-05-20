@@ -1,7 +1,7 @@
 export default function Loading() {
   return (
     <div className="user-places-page">
-        <h1 className="user-places-title">User Listings</h1>
+        <h1 className="user-places-title">Destinations and Stays</h1>
 
         <div className="user-places-list">
           {[1, 2, 3, 4].map((_, index) => (

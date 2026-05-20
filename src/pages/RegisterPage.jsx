@@ -102,6 +102,7 @@ export default function RegisterPage() {
           onChange={(event) => {
             setPassword(event.target.value);
           }}
+          onClick={() => setPasswordHint("Password must be at least 12 characters.")}
         />
 
         <button
