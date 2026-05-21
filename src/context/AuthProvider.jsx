@@ -8,6 +8,14 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     async function fetchUser() {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+      setUser(null);
+      setLoading(false);
+      return;
+    }
+
       try {
         const response = await api.get("/auth/profile");
         setUser(response.data.user);
@@ -15,6 +23,8 @@ export function AuthProvider({ children }) {
         if (error.response?.status !== 401) {
           console.error(error);
         }
+
+        localStorage.removeItem("token")
         setUser(null);
       } finally {
         setLoading(false);
@@ -26,6 +36,8 @@ export function AuthProvider({ children }) {
 
   async function logout() {
     try {
+      localStorage.removeItem("token");
+
       await api.post("/auth/logout");
     } catch (error) {
       if (error.response?.status !== 401) {
