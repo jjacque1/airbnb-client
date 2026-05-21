@@ -223,20 +223,61 @@ export default function AddPlacePage() {
           <label>
             <input
               type="checkbox"
+              name="pets"
+              checked={perks.includes("pets")}
+              onChange={handlePerksChange}
+            />
+            Pets allowed
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              name="entrance"
+              checked={perks.includes("entrance")}
+              onChange={handlePerksChange}
+            />
+            Private entrance
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
               name="kitchen"
               checked={perks.includes("kitchen")}
               onChange={handlePerksChange}
             />
             Kitchen
           </label>
+
           <label>
             <input
               type="checkbox"
-              name="hottub"
-              checked={perks.includes("hottub")}
+              name="ac"
+              checked={perks.includes("ac")}
               onChange={handlePerksChange}
             />
-            Hot tub
+            Air conditioning
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              name="pool"
+              checked={perks.includes("pool")}
+              onChange={handlePerksChange}
+            />
+            Pool
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              name="washer"
+              checked={perks.includes("washer")}
+              onChange={handlePerksChange}
+            />
+            Washer
           </label>
         </div>
       </div>
