@@ -47,7 +47,10 @@ export default function BookingPage() {
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <div className="place-card">
-                <img src={booking.place.photos?.[0] || defaultPlaceImage}  defaultPlaceImage alt={booking.place.title} />
+                <img
+                  src={booking.place.photos?.[0] || defaultPlaceImage}
+                  alt={booking.place.title}
+                />
 
                 <div className="place-card-body">
                   <h3 className="place-card-title">{booking.place.title}</h3>

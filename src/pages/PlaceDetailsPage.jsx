@@ -126,10 +126,10 @@ export default function PlaceDetailsPage() {
         navigate("/user/bookings");
       }, 1500);
     } catch (error) {
-      setError(
-        error.response?.data?.message ||
-          "Something went wrong. Please try again.",
-      );
+      console.log(error.response);
+      console.log(document.cookie);
+
+      setError(JSON.stringify(error.response?.data) || error.message);
     }
   }
 
